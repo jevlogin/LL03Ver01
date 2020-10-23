@@ -5,23 +5,29 @@ namespace JevLogin
 {
     public sealed class Test : MonoBehaviour
     {
-        private int? _test = null;
-        private bool? _isEnabled = null;
-        private double? _pi = 3.14f;
-
-        private int? _test1 = 5;
-        private bool? _isEnabled1 = null;
-        private double? _pi1 = 3.14f;
-
-
         private void Start()
         {
+            Example example = new Example();
+
+            Debug.Log(example?.Object?.Name ?? "");
+
+            /**
+            int? x = null;
+            int y = x ?? 2;
+
+            int? a = 5;
+            int b = a ?? 10;
+
+            Debug.Log($"x = {x}; b = {b}");
+            */
+
+            /**
             int? b = 1;
             if (b.HasValue)
             {
                 Debug.Log($"Значение b = {b.Value}");
             }
-
+            *
 
             /**
             InteractiveObject interactiveObject = new InteractiveObject();
