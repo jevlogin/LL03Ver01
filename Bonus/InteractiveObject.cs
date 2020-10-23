@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InteractiveObject : MonoBehaviour
+
+public class InteractiveObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public virtual string DisplayFirstWay()
     {
-        
+        return $"I am a {nameof(InteractiveObject)} class method";
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual string DisplaySecondWay()
     {
-        
+        return $"I am a {nameof(InteractiveObject)} class method";
+    }
+    
+    public virtual string DisplayThirdWay()
+    {
+        return $"I am a {nameof(InteractiveObject)} class method";
     }
 }
