@@ -7,7 +7,30 @@ namespace JevLogin
     {
         private void Start()
         {
-            Player player = new PlayerBall();
+
+            InteractiveObject interactiveObject = new InteractiveObject();
+            Debug.Log(interactiveObject.DisplayFirstWay());
+            Debug.Log(interactiveObject.DisplaySecondWay());
+            Debug.Log(interactiveObject.DisplayThirdWay());
+
+            Debug.Log("++++++++++++++++++++++++++++++");
+
+            InteractiveObject interactiveObject1 = new GoodBonus();
+            Debug.Log(interactiveObject1.DisplayFirstWay());
+            Debug.Log(interactiveObject1.DisplaySecondWay());
+            Debug.Log(interactiveObject1.DisplayThirdWay());
+
+            Debug.Log("++++++++++++++++++++++++++++++");
+
+            GoodBonus interactiveObject2 = new GoodBonus();
+            Debug.Log(interactiveObject2.DisplayFirstWay());
+            Debug.Log(interactiveObject2.DisplaySecondWay());
+            Debug.Log(interactiveObject2.DisplayThirdWay());
+
+            Debug.Log("++++++++++++++++++++++++++++++");
+
+
+            //Player player = new PlayerBall();
 
             /**
             Vector v1 = new Vector(-5, 5);

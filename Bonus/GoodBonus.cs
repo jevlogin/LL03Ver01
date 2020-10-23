@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GoodBonus : MonoBehaviour
+
+public sealed class GoodBonus : InteractiveObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public override string DisplaySecondWay()
     {
-        
+        return $"I am a {nameof(GoodBonus)} class method";
     }
 
-    // Update is called once per frame
-    void Update()
+    public new string DisplayThirdWay()
     {
-        
+        return $"I am a {nameof(GoodBonus)} class method";
     }
 }
