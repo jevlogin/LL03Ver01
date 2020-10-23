@@ -3,6 +3,13 @@
 
 public class InteractiveObject
 {
+    protected virtual void Interaction()
+    {
+
+    }
+
+
+    /**
     public virtual string DisplayFirstWay()
     {
         return $"I am a {nameof(InteractiveObject)} class method";
@@ -17,4 +24,5 @@ public class InteractiveObject
     {
         return $"I am a {nameof(InteractiveObject)} class method";
     }
+    */
 }
