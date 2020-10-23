@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class InteractiveObject
+public abstract class InteractiveObject
 {
     protected virtual void Interaction()
     {

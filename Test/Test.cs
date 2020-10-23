@@ -7,9 +7,11 @@ namespace JevLogin
     {
         private void Start()
         {
+            /**
             Example example = new Example();
 
             Debug.Log(example?.Object?.Name ?? "");
+            */
 
             /**
             int? x = null;
