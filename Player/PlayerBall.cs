@@ -8,6 +8,7 @@ namespace JevLogin
         private void FixedUpdate()
         {
             Move();
+            Jump();
         }
     }
 }
