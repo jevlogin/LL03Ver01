@@ -43,19 +43,10 @@ namespace JevLogin
 
         protected void Jump()
         {
-            if (Input.GetButtonDown("Jump") && IsGrounded())
+            if (Input.GetButtonDown("Jump"))
             {
                 _rigidbody.AddForce(Vector3.up * JumpHeight, ForceMode.Impulse);
             }
-        }
-
-        private bool IsGrounded()
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, MinDownRayCast))
-            {
-                return true;
-            }
-            else return false;
         }
 
         #endregion
