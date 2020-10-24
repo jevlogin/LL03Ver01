@@ -3,10 +3,7 @@
 
 public abstract class InteractiveObject
 {
-    protected virtual void Interaction()
-    {
-
-    }
+    protected abstract void Interaction();
 
     public virtual string DisplayFirstWay()
     {

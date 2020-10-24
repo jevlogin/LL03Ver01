@@ -5,7 +5,6 @@ public sealed class GoodBonus : InteractiveObject
 {
     protected override void Interaction()
     {
-        base.Interaction();
-        //TODO add bonus
+        throw new System.NotImplementedException();
     }
 }
