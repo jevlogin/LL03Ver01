@@ -3,7 +3,7 @@
 
 namespace JevLogin
 {
-    public class Player : MonoBehaviour, IInit
+    public class Player : MonoBehaviour, IInit<float>
     {
         #region Fields
 
@@ -49,9 +49,10 @@ namespace JevLogin
             }
         }
 
-        public void Init()
+        
+        public void Init(float value)
         {
-            throw new System.NotImplementedException();
+            Speed = value;
         }
 
         #endregion

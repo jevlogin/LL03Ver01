@@ -1,7 +1,7 @@
 ﻿namespace JevLogin
 {
-    interface IInit
+    interface IInit<T>
     {
-        void Init();
+        void Init(T value);
     }
 }

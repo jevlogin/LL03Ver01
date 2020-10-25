@@ -12,8 +12,8 @@ namespace JevLogin
             //Display(5d);
             //Display("mama");
 
-            var player = FactoryEnemy<Player>();
-            player.JumpHeight = 5.0f;
+            var player = FactoryEnemy<Player, float>(777.0f);
+            Display($"Speed = {player.Speed}");
 
         }
 
@@ -22,10 +22,10 @@ namespace JevLogin
             Debug.Log(value);
         }
 
-        private T FactoryEnemy<T>() where T : IInit, new ()
+        private T FactoryEnemy<T, T2>(T2 hp) where T : IInit<T2>, new ()
         {
             var player = new T();
-            player.Init();
+            player.Init(hp);
             return player;
         }
     }
