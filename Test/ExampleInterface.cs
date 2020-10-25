@@ -8,6 +8,10 @@ namespace JevLogin
     {
         private void Start()
         {
+            User user2 = new User();
+            user2[0] = new Vector3();
+
+            return;
             User user = new User
             {
                 Name = "Evgeniy",
@@ -30,10 +34,16 @@ namespace JevLogin
         {
             public string Name;
             public Health Health;
+            private Vector3[] _points;
+
+            public Vector3 this[int i]
+            {
+                get { return _points[i]; }
+                set { _points[i] = value; }
+            }
 
             public object Clone()
             {
-                //return MemberwiseClone();
                 return new User
                 {
                     Name = Name,
