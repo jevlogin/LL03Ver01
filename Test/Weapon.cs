@@ -23,6 +23,11 @@ namespace JevLogin
                     {
                         enemy.AddDamage();
                     }
+                    if (hit.collider.TryGetComponent(out EnemyHead enemy2))
+                    {
+                        enemy2.AddDamage();
+                    }
+
                 }
             }
         }
