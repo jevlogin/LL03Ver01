@@ -5,12 +5,7 @@ namespace JevLogin
 {
     public class Enemy : IPlayer, IUser
     {
-        void IPlayer.Move()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IUser.Move()
+        public void Move()
         {
             throw new System.NotImplementedException();
         }
@@ -23,6 +18,8 @@ namespace JevLogin
             Enemy enemy = new Enemy();
             ((IPlayer)enemy).Move();
             ((IUser)enemy).Move();
+
+            enemy.Move();
         }
     }
 }
