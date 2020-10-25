@@ -14,6 +14,15 @@ namespace JevLogin
         {
             throw new System.NotImplementedException();
         }
+    }
 
+    public class Example
+    {
+        private void Main()
+        {
+            Enemy enemy = new Enemy();
+            ((IPlayer)enemy).Move();
+            ((IUser)enemy).Move();
+        }
     }
 }
