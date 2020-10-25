@@ -19,13 +19,9 @@ namespace JevLogin
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit, 15.0f))
                 {
-                    if (hit.collider.TryGetComponent(out EnemyBody enemy))
+                    if (hit.collider.TryGetComponent(out IDamagable enemy))
                     {
                         enemy.AddDamage();
-                    }
-                    if (hit.collider.TryGetComponent(out EnemyHead enemy2))
-                    {
-                        enemy2.AddDamage();
                     }
 
                 }

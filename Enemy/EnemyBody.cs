@@ -3,7 +3,7 @@
 
 namespace JevLogin
 {
-    public sealed class EnemyBody : MonoBehaviour
+    public sealed class EnemyBody : MonoBehaviour, IDamagable
     {
         public void AddDamage()
         {
