@@ -18,7 +18,11 @@ namespace JevLogin
             {
 
             }
-            
+
+            using (User user3 = new User())
+            {
+
+            }
 
             return;
             User user = new User
@@ -47,7 +51,7 @@ namespace JevLogin
             Third = 3
         }
 
-        public class User : ICloneable, IEnumerable
+        public class User : ICloneable, IEnumerable, IDisposable
         {
             public string Name;
             public Health Health;
@@ -99,6 +103,11 @@ namespace JevLogin
                         MaxHealth = Health.MaxHealth
                     }
                 };
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
             }
 
             public IEnumerator GetEnumerator()
