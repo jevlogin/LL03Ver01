@@ -3,7 +3,7 @@
 
 namespace JevLogin
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IInit
     {
         #region Fields
 
@@ -47,6 +47,11 @@ namespace JevLogin
             {
                 _rigidbody.AddForce(Vector3.up * JumpHeight, ForceMode.Impulse);
             }
+        }
+
+        public void Init()
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
