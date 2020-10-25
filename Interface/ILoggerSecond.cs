@@ -1,6 +1,6 @@
 ﻿namespace JevLogin
 {
-    internal interface ILoggerSecond
+    internal interface ILoggerSecond : IEnemy
     {
         void Log();
     }

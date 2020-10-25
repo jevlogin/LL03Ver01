@@ -1,6 +1,6 @@
 ﻿namespace JevLogin
 {
-    internal interface IDamagable
+    internal interface IDamagable : IEnemy
     {
         void AddDamage();
     }

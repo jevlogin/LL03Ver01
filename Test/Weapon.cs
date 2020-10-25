@@ -20,9 +20,21 @@ namespace JevLogin
 
                 if (Physics.Raycast(ray, out var hit, 15.0f))
                 {
-                    if (hit.collider.TryGetComponent(out IDamagable enemy))
+                    if (hit.collider.TryGetComponent(out IEnemy enemy))
                     {
-                        enemy.AddDamage();
+                        switch (enemy)
+                        {
+                            case ILoggerSecond loggerSecond:
+                                loggerSecond.Log();
+                                break;
+                            case IDamagable damagable:
+                                damagable.AddDamage();
+                                break;
+
+                            default:
+                                Debug.Log($"Ничего не произошло");
+                                break;
+                        }
                     }
 
                 }
