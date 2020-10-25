@@ -17,6 +17,7 @@ namespace JevLogin
             if (Input.GetButtonDown("Fire1"))
             {
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
                 if (Physics.Raycast(ray, out var hit, 15.0f))
                 {
                     if (hit.collider.TryGetComponent(out IDamagable enemy))
