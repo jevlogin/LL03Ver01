@@ -13,7 +13,7 @@ namespace JevLogin
                 Name = "Evgeniy",
                 Health = new Health
                 {
-                    CurrentHealth = 10.0f,
+                    CurrentHealth = 6.0f,
                     MaxHealth = 100.0f
                 }
             };
@@ -33,7 +33,16 @@ namespace JevLogin
 
             public object Clone()
             {
-                return MemberwiseClone();
+                //return MemberwiseClone();
+                return new User
+                {
+                    Name = Name,
+                    Health = new Health
+                    {
+                        CurrentHealth = Health.CurrentHealth,
+                        MaxHealth = Health.MaxHealth
+                    }
+                };
             }
 
             public override string ToString()
