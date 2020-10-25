@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -12,6 +13,11 @@ namespace JevLogin
             user2[0] = new Vector3();
             var s = user2[MyEnum.None];
             Debug.Log(s);
+
+            foreach (var use in user2)
+            {
+
+            }
             
 
             return;
@@ -41,7 +47,7 @@ namespace JevLogin
             Third = 3
         }
 
-        public class User : ICloneable
+        public class User : ICloneable, IEnumerable
         {
             public string Name;
             public Health Health;
@@ -93,6 +99,11 @@ namespace JevLogin
                         MaxHealth = Health.MaxHealth
                     }
                 };
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                throw new NotImplementedException();
             }
 
             public override string ToString()
