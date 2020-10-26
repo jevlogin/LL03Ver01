@@ -1,7 +1,9 @@
-﻿namespace JevLogin
+﻿using UnityEngine;
+
+namespace JevLogin
 {
     public interface IFlay
     {
-        void Flay();
+        void Flay() => Debug.Log($"I can Fly");
     } 
 }
