@@ -19,6 +19,7 @@ public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
     {
         _material = GetComponent<Renderer>().material;
         _lengthFlay = Random.Range(1.0f, 5.0f);
+        Flicker();
     }
 
     #endregion
