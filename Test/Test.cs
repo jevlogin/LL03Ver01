@@ -8,22 +8,15 @@ namespace JevLogin
     {
         private void Start()
         {
-            var saveData = new SaveData<Guid, Vector3>
+            var saveData = new SaveData<Guid>
             {
-                IdPlayer = new Guid(),
-                Position = Vector3.one
+                IdPlayer = new Guid()
             };
 
-
-            //var saveData = new SaveData<Guid>
-            //{
-            //    IdPlayer = new Guid()
-            //};
-
-            //var savedDataExample = new SaveData<string>
-            //{
-            //    IdPlayer = "name_235"
-            //};
+            var savedDataExample = new SaveData<string>
+            {
+                IdPlayer = "name_235"
+            };
         }
     }
 }

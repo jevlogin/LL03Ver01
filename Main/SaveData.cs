@@ -3,9 +3,9 @@
 
 namespace JevLogin
 {
-    public sealed class SaveData<T>
+    public sealed class SaveData<T> where T : struct
     {
         public int CountBonuses;
-        public static T IdPlayer = default;
+        public T IdPlayer = default;
     }
 }
