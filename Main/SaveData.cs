@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace JevLogin
 {
-    public sealed class SaveData : BaseExample<Guid>
+    public sealed class SaveData<T> : BaseExample<Guid>
     {
+        public T Position;
         public SaveData(Guid id) : base(id)
         {
             IdPlayer = id;
