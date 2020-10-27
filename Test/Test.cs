@@ -9,9 +9,9 @@ namespace JevLogin
         {
             var interactiveObject = new ListInteractableObject();
 
-            while (interactiveObject.MoveNext())
+            foreach (var o in interactiveObject)
             {
-                print(interactiveObject.Current);
+                print(o);
             }
         }
     }
