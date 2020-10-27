@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace JevLogin
 {
-    public sealed class BadBonus : InteractiveObject, IFlay, IRotation
+    public sealed class BadBonus : InteractiveObject, IFlay, IRotation, ICloneable
     {
         private float _lengthFlay;
         private float _speedRotation;
 
         private void Awake()
         {
-            _lengthFlay = Random.Range(1.0f, 5.0f);
-            _speedRotation = Random.Range(10.0f, 50.0f);
+            _lengthFlay = UnityEngine.Random.Range(1.0f, 5.0f);
+            _speedRotation = UnityEngine.Random.Range(10.0f, 50.0f);
         }
 
         public void Flay()
@@ -27,6 +28,12 @@ namespace JevLogin
         protected override void Interaction()
         {
             //TODO Add bad bonus
+        }
+
+        public object Clone()
+        {
+            var result = Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
+            return result;
         }
     }
 }
