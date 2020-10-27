@@ -13,6 +13,7 @@ namespace JevLogin
         public ListInteractableObject()
         {
             _interactiveObjects = Object.FindObjectsOfType<InteractiveObject>();
+            System.Array.Sort(_interactiveObjects);
         }
 
         public object Current => _interactiveObjects[_index];

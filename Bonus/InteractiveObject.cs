@@ -1,8 +1,9 @@
 ﻿using JevLogin;
+using System;
 using UnityEngine;
 
 
-public abstract class InteractiveObject : MonoBehaviour, IInteractable
+public abstract class InteractiveObject : MonoBehaviour, IInteractable, IComparable<InteractiveObject>
 {
     public bool IsInteractable
     {
@@ -30,7 +31,7 @@ public abstract class InteractiveObject : MonoBehaviour, IInteractable
     {
         if (TryGetComponent(out Renderer renderer))
         {
-            renderer.material.color = Random.ColorHSV();
+            renderer.material.color = UnityEngine.Random.ColorHSV();
         }
     }
 
@@ -40,5 +41,10 @@ public abstract class InteractiveObject : MonoBehaviour, IInteractable
         {
             renderer.material.color = Color.cyan;
         }
+    }
+
+    public int CompareTo(InteractiveObject other)
+    {
+        return name.CompareTo(other.name);
     }
 }
