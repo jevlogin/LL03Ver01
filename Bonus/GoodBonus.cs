@@ -1,51 +1,59 @@
-﻿using JevLogin;
+﻿using System;
 using UnityEngine;
 
 
-public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
+namespace JevLogin
 {
-    #region Fields
-
-    public int Point;
-
-    private Material _material;
-    private DisplayBonuses _displayBonuses;
-
-    private float _lengthFlay;
-
-
-    #endregion
-
-
-    #region UnityMethods
-
-    private void Awake()
+    public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker, IEquatable<GoodBonus>
     {
-        _displayBonuses = new DisplayBonuses();
-        _material = GetComponent<Renderer>().material;
-        _lengthFlay = Random.Range(1.0f, 5.0f);
-        Flicker();
-    }
+        #region Fields
 
-    #endregion
+        public int Point;
+
+        private Material _material;
+        private DisplayBonuses _displayBonuses;
+
+        private float _lengthFlay;
 
 
-    #region Methods
+        #endregion
 
-    public void Flay()
-    {
-        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.PingPong(Time.time, _lengthFlay), transform.localPosition.z);
-    }
 
-    public void Flicker()
-    {
-        _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, Mathf.PingPong(Time.time, 1.0f));
-    }
+        #region UnityMethods
 
-    protected override void Interaction()
-    {
-        _displayBonuses.Display(5);
-    }
+        private void Awake()
+        {
+            _displayBonuses = new DisplayBonuses();
+            _material = GetComponent<Renderer>().material;
+            _lengthFlay = UnityEngine.Random.Range(1.0f, 5.0f);
+            Flicker();
+        }
 
-    #endregion
+        #endregion
+
+
+        #region Methods
+
+        public void Flay()
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.PingPong(Time.time, _lengthFlay), transform.localPosition.z);
+        }
+
+        public void Flicker()
+        {
+            _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, Mathf.PingPong(Time.time, 1.0f));
+        }
+
+        protected override void Interaction()
+        {
+            _displayBonuses.Display(5);
+        }
+
+        public bool Equals(GoodBonus other)
+        {
+            return Point == other.Point;
+        }
+
+        #endregion
+    } 
 }

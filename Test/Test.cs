@@ -9,11 +9,10 @@ namespace JevLogin
     {
         private void Start()
         {
-            using (StreamReader reader = new StreamReader("example path"))
-            {
-                //  Работаем с объектом
-            }   //  Неявно вызывается функция Dispose()
-            //  Объект выгружен из памяти
+            var objects = FindObjectsOfType<GoodBonus>().ToList();
+            var bonus = GameObject.Find("InteractiveCube").GetComponent<GoodBonus>();
+            objects.Remove(bonus);
+            print($"{objects.Contains(bonus)}");
         }
     }
 }
