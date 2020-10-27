@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using UnityEngine;
 
 
@@ -8,7 +9,11 @@ namespace JevLogin
     {
         private void Start()
         {
-            var a = FindObjectOfType<BadBonus>().Clone();
+            using (StreamReader reader = new StreamReader("example path"))
+            {
+                //  Работаем с объектом
+            }   //  Неявно вызывается функция Dispose()
+            //  Объект выгружен из памяти
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace JevLogin
 {
-    public sealed class GameController : MonoBehaviour
+    public sealed class GameController : MonoBehaviour, IDisposable
     {
         private InteractiveObject[] _interactiveObjects;
 
@@ -35,6 +36,14 @@ namespace JevLogin
                 {
                     rotation.Rotation();
                 }
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (var interactiveObject in _interactiveObjects)
+            {
+                Destroy(interactiveObject.gameObject);
             }
         }
     }
