@@ -9,10 +9,12 @@ namespace JevLogin
     {
         private void Start()
         {
-            var objects = FindObjectsOfType<GoodBonus>().ToList();
-            var bonus = GameObject.Find("InteractiveCube").GetComponent<GoodBonus>();
-            objects.Remove(bonus);
-            print($"{objects.Contains(bonus)}");
+            var objects = FindObjectsOfType<GoodBonus>().Distinct(new GoodBonusEqualityComparer());
+
+            foreach (var o in objects)
+            {
+                print($"{o.name}");
+            }
         }
     }
 }
