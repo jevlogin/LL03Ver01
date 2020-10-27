@@ -10,6 +10,8 @@ public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
 
     private float _lengthFlay;
 
+    private DisplayBonuses _displayBonuses;
+
     #endregion
 
 
@@ -17,6 +19,7 @@ public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
 
     private void Awake()
     {
+        _displayBonuses = new DisplayBonuses();
         _material = GetComponent<Renderer>().material;
         _lengthFlay = Random.Range(1.0f, 5.0f);
         Flicker();
@@ -39,8 +42,8 @@ public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
 
     protected override void Interaction()
     {
-        //TODO Add bonus
-    } 
+        _displayBonuses.Display(5);
+    }
 
     #endregion
 }

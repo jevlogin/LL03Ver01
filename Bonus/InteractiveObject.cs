@@ -1,22 +1,44 @@
-﻿using UnityEngine;
+﻿using JevLogin;
+using UnityEngine;
 
 
-public abstract class InteractiveObject : MonoBehaviour
+public abstract class InteractiveObject : MonoBehaviour, IInteractable
 {
+    public bool IsInteractable
+    {
+        get;
+    }
+
+    private void Start()
+    {
+        ((IAction)this).Action();
+        ((IInitialization)this).Action();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!IsInteractable || !other.CompareTag("Player"))
+        {
+            return;
+        }
+        Interaction();
+        Destroy(gameObject);
+    }
     protected abstract void Interaction();
 
-    public virtual string DisplayFirstWay()
+    void IAction.Action()
     {
-        return $"I am a {nameof(InteractiveObject)} class method";
+        if (TryGetComponent(out Renderer renderer))
+        {
+            renderer.material.color = Random.ColorHSV();
+        }
     }
 
-    public virtual string DisplaySecondWay()
+    void IInitialization.Action()
     {
-        return $"I am a {nameof(InteractiveObject)} class method";
-    }
-    
-    public virtual string DisplayThirdWay()
-    {
-        return $"I am a {nameof(InteractiveObject)} class method";
+        if (TryGetComponent(out Renderer renderer))
+        {
+            renderer.material.color = Color.cyan;
+        }
     }
 }
