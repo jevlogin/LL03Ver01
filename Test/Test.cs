@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 
 namespace JevLogin
@@ -7,11 +8,12 @@ namespace JevLogin
     {
         private void Start()
         {
-            var interactiveObject = new ListInteractableObject();
-
-            foreach (var o in interactiveObject)
+            var goodBonusComparer = new GoodBonusComparer();
+            var objects = FindObjectsOfType<GoodBonus>().ToList();
+            objects.Sort(goodBonusComparer);
+            foreach (var goodBonus in objects)
             {
-                print(o);
+                print($"{goodBonus.name} - {goodBonus.Point}");
             }
         }
     }

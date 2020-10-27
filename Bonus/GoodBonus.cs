@@ -6,11 +6,13 @@ public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
 {
     #region Fields
 
+    public int Point;
+
     private Material _material;
+    private DisplayBonuses _displayBonuses;
 
     private float _lengthFlay;
 
-    private DisplayBonuses _displayBonuses;
 
     #endregion
 
