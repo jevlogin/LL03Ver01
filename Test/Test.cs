@@ -8,15 +8,9 @@ namespace JevLogin
     {
         private void Start()
         {
-            var saveData = new SaveData<Guid>
-            {
-                IdPlayer = new Guid()
-            };
-
-            var savedDataExample = new SaveData<string>
-            {
-                IdPlayer = "name_235"
-            };
+            BaseExample<string> data = new BaseExample<string>("name_235");
+            BaseExample<int> data2 = new SaveData<int>(3775);
+            SaveData<Guid> data1 = new SaveData<Guid>(Guid.NewGuid());
         }
     }
 }
