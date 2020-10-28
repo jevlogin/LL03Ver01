@@ -22,14 +22,7 @@ public abstract class InteractiveObject : MonoBehaviour, IInteractable, ICompara
         {
             return;
         }
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log($"Поздравляю! Вы нашли бонус!");
-        }
-        else
-        {
-            Debug.Log($"Хрен там было");
-        }
+        
         Interaction();
         Destroy(gameObject);
     }

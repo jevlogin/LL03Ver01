@@ -44,10 +44,7 @@ namespace JevLogin
 
         protected override void Interaction()
         {
-            var currentBonus = _displayBonuses.GetTextBonus();
-            Debug.Log($"currentBonus = {currentBonus.ToString()}");
-
-            _displayBonuses.Display(5);
+            _displayBonuses.Display(Point);
         }
 
         public bool Equals(GoodBonus other)

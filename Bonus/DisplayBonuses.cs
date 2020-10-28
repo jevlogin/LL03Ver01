@@ -6,6 +6,8 @@ namespace JevLogin
     public sealed class DisplayBonuses
     {
         private Text _text;
+        private static int _currentBonus = 0;
+
         public DisplayBonuses()
         {
             _text = Object.FindObjectOfType<Text>();
@@ -13,12 +15,8 @@ namespace JevLogin
 
         public void Display(int value)
         {
-            _text.text = $"Вы набрали {value}";
-        }
-
-        public string GetTextBonus()
-        {
-            return _text.text;
+            _currentBonus += value;
+            _text.text = $"Вы набрали {_currentBonus}";
         }
     }
 }
