@@ -9,12 +9,13 @@ namespace JevLogin
     {
         private void Start()
         {
-            var objects = FindObjectsOfType<GoodBonus>().Distinct(new GoodBonusEqualityComparer());
+            var objects = new ListInteractableObject();
 
-            foreach (var o in objects)
+            for (int i = 0; i < objects.Count; i++)
             {
-                print($"{o.name}");
+                print($"{objects[i]}");
             }
+
         }
     }
 }

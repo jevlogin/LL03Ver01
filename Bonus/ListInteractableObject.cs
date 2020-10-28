@@ -6,9 +6,17 @@ namespace JevLogin
 {
     public sealed class ListInteractableObject : IEnumerator, IEnumerable
     {
+        #region Fields
+
         private InteractiveObject[] _interactiveObjects;
-        private int _index = -1;
         private InteractiveObject _current;
+
+        private int _index = -1;
+
+        #endregion
+
+
+        #region Property
 
         public ListInteractableObject()
         {
@@ -17,6 +25,20 @@ namespace JevLogin
         }
 
         public object Current => _interactiveObjects[_index];
+
+        public int Count => _interactiveObjects.Length;
+
+        public InteractiveObject this[int index]
+        {
+            get => _interactiveObjects[index];
+            set => _interactiveObjects[index] = value;
+        }
+
+        #endregion
+
+
+        #region Method
+
 
         public bool MoveNext()
         {
@@ -40,5 +62,7 @@ namespace JevLogin
         {
             return GetEnumerator();
         }
+
+        #endregion
     }
 }
