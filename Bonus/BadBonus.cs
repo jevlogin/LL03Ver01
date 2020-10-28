@@ -1,5 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.Random;
+using static UnityEngine.Mathf;
+using static UnityEngine.Time;
 
 
 namespace JevLogin
@@ -11,8 +14,8 @@ namespace JevLogin
 
         private void Awake()
         {
-            _lengthFlay = UnityEngine.Random.Range(1.0f, 5.0f);
-            _speedRotation = UnityEngine.Random.Range(10.0f, 50.0f);
+            _lengthFlay = Range(1.0f, 5.0f);
+            _speedRotation = Range(10.0f, 50.0f);
         }
 
         public void Flay()
