@@ -36,9 +36,11 @@ namespace JevLogin
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized * Speed;
 
-            _rigidbody.velocity = movement * Speed * Time.deltaTime;
+            movement.y = _rigidbody.velocity.y;
+
+            _rigidbody.velocity = movement;
         }
 
         protected void Jump()
@@ -49,7 +51,7 @@ namespace JevLogin
             }
         }
 
-        
+
         public void Init(float value)
         {
             Speed = value;

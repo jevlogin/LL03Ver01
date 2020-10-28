@@ -15,5 +15,10 @@ namespace JevLogin
         {
             _text.text = $"Вы набрали {value}";
         }
+
+        public string GetTextBonus()
+        {
+            return _text.text;
+        }
     }
 }

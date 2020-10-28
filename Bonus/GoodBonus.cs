@@ -15,7 +15,6 @@ namespace JevLogin
 
         private float _lengthFlay;
 
-
         #endregion
 
 
@@ -45,6 +44,9 @@ namespace JevLogin
 
         protected override void Interaction()
         {
+            var currentBonus = _displayBonuses.GetTextBonus();
+            Debug.Log($"currentBonus = {currentBonus.ToString()}");
+
             _displayBonuses.Display(5);
         }
 

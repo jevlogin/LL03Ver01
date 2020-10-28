@@ -8,7 +8,7 @@ public abstract class InteractiveObject : MonoBehaviour, IInteractable, ICompara
     public bool IsInteractable
     {
         get;
-    }
+    } = true;
 
     private void Start()
     {
