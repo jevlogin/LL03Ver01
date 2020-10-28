@@ -26,7 +26,6 @@ namespace JevLogin
             _displayBonuses = new DisplayBonuses();
             _material = GetComponent<Renderer>().material;
             _lengthFlay = UnityEngine.Random.Range(1.0f, 5.0f);
-            Flicker();
         }
 
         #endregion
