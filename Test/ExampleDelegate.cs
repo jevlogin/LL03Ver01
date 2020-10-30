@@ -11,6 +11,8 @@ namespace JevLogin
 
             exampleDelegate.Test();
             exampleDelegate.StartDelegate();
+            exampleDelegate.RemoveDelegate();
+            exampleDelegate.StartDelegate();
         }
     }
 }
