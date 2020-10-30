@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace JevLogin
@@ -19,6 +16,8 @@ namespace JevLogin
             s.Add(o2.Do);
             s.Run();
             s.Remove(o1.Do);
+            s.Run();
+            s.Add(o1.Do);
             s.Run();
         }
     }
