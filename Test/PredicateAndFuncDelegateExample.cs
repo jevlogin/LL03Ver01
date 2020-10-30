@@ -15,7 +15,7 @@ namespace JevLogin
         {
             if (Predicate(collision))
             {
-                _healthPoint = Func(_armor);
+                _healthPoint = Func(_healthPoint);
             }
             Debug.Log($"{_healthPoint}");
         }

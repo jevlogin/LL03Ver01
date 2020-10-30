@@ -11,9 +11,10 @@ namespace JevLogin
         private void Start()
         {
             var example = FindObjectOfType<PredicateAndFuncDelegateExample>();
+
             example.Predicate = collision => collision.gameObject.CompareTag("Player");
 
-            const float damage = 50.0f;
+            const float damage = 5.0f;
 
             example.Func = f => f - damage;
         }
