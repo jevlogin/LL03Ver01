@@ -9,21 +9,11 @@ namespace JevLogin
     {
         private void Start()
         {
-            StreamWriter streamWriter = null;
-
             try // Контролируемый блок
             {
-                var path = Path.Combine(@"C:\", "temp", "text.txt");
-                streamWriter = new StreamWriter(path);
-                int a;
-                do
-                {
-                    a = Convert.ToInt32(1);
-                    streamWriter.WriteLine(a);
-                } while (a != 0);
+                Division(5, 0);
             }
             catch (FormatException) // Один или несколько блоков обработки исключений
-
             {
                 Debug.Log($"Ошибка ввода данных");
             }
@@ -42,11 +32,19 @@ namespace JevLogin
                 Debug.Log($"Информация об ошибке" + exc.Message);
             }
             finally // Блок завершения
-
             {
-                // Использование блока finally гарантирует, что набор операторов будет выполняться всегда, независимо от того, возникло исключение любого типа или нет)
-                streamWriter?.Close();
+               
             }
+        }
+
+        private void Division(int v1, int v2)
+        {
+            if (Convert.ToInt32(v2) == 0)
+            {
+                throw new Exception("Деление на ноль");
+            }
+            var x = Convert.ToInt32(v1) / Convert.ToInt32(v2);
+            Debug.Log($"{v1} / {v2} = {x}");
         }
     }
 }
