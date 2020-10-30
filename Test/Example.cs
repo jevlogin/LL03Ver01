@@ -67,7 +67,15 @@ namespace JevLogin
                 ["Move"] = Move,
                 ["Attack"] = Attack
             };
-            _actions[value].Invoke();
+            var beginInvoke = _actions[value].BeginInvoke(CallBack, value);
+
+            if (beginInvoke.IsCompleted)
+            {
+
+
+            }
+
+            _actions[value].EndInvoke(beginInvoke);
 
             //  Dictionary заменяет весь switch
 
@@ -81,8 +89,13 @@ namespace JevLogin
                     break;
                 default:
                     break;
-                
+
             }
+        }
+
+        private void CallBack(IAsyncResult ar)
+        {
+            throw new NotImplementedException();
         }
 
         private void Attack()
