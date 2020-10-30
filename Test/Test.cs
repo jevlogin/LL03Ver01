@@ -10,13 +10,15 @@ namespace JevLogin
     {
         private void Start()
         {
-            var example = FindObjectOfType<PredicateAndFuncDelegateExample>();
-
-            example.Predicate = collision => collision.gameObject.CompareTag("Player");
-
-            const float damage = 5.0f;
-
-            example.Func = f => f - damage;
+            DelegateObserver.Source s = new DelegateObserver.Source();
+            DelegateObserver.Observer1 o1 = new DelegateObserver.Observer1();
+            DelegateObserver.Observer2 o2 = new DelegateObserver.Observer2();
+            DelegateObserver.MyDelegate d1 = new DelegateObserver.MyDelegate(o1.Do);
+            s.Add(d1);
+            s.Add(o2.Do);
+            s.Run();
+            s.Remove(o1.Do);
+            s.Run();
         }
     }
 }
