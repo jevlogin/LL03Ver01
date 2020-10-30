@@ -31,7 +31,7 @@ namespace JevLogin
 
         protected override void Interaction()
         {
-            CaughPlayer();
+            CaughPlayer?.Invoke();
         }
 
         public object Clone()

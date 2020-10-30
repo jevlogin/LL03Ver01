@@ -63,6 +63,11 @@ namespace JevLogin
                 if (interactableObject is InteractiveObject interactiveObject)
                 {
                     Destroy(interactiveObject.gameObject);
+                    if (interactableObject is BadBonus badBonus)
+                    {
+                        badBonus.CaughPlayer -= CaughPlayer;
+                        badBonus.CaughPlayer -= _displayEndGame.GameOver;
+                    }
                 }
             }
         }
