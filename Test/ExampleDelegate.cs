@@ -11,7 +11,7 @@ namespace JevLogin
 
             exampleDelegate.Test();
             exampleDelegate.StartDelegate();
-            exampleDelegate.RemoveDelegate();
+            exampleDelegate.RemoveDelegate(() => Debug.Log($"JEVLOGIN"));
             exampleDelegate.StartDelegate();
         }
     }

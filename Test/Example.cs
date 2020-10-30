@@ -14,9 +14,16 @@ namespace JevLogin
             _myDelegate += delegate { Debug.Log(3); };   //  Анонимный метод
         }
 
-        public void StartDelegate() => _myDelegate?.Invoke();
+        public void StartDelegate()
+        {
+            _myDelegate?.Invoke();
+        }
 
-        public void RemoveDelegate() => _myDelegate -= MyDelegate;
+        public void RemoveDelegate(MyDelegate myDelegate)
+        {
+            _myDelegate -= MyDelegate;
+            _myDelegate += myDelegate;
+        }
 
         private void MyDelegate()
         {
