@@ -1,8 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using static UnityEngine.Random;
-using static UnityEngine.Mathf;
-using static UnityEngine.Time;
 
 
 namespace JevLogin
