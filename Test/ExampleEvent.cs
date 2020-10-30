@@ -10,6 +10,10 @@ namespace JevLogin
         public void StartMethod()
         {
             Test.Invoke();
+
+            test.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler test;
     }
 }
