@@ -1,22 +1,52 @@
-﻿using UnityEngine;
+﻿using JevLogin;
+using System;
+using UnityEngine;
 
 
-public abstract class InteractiveObject
+public abstract class InteractiveObject : MonoBehaviour, IInteractable, IComparable<InteractiveObject>
 {
+    public bool IsInteractable
+    {
+        get;
+    } = true;
+
+    private void Start()
+    {
+        ((IAction)this).Action();
+        ((IInitialization)this).Action();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!IsInteractable || !other.CompareTag("Player"))
+        {
+            return;
+        }
+        
+        Interaction();
+        Destroy(gameObject);
+    }
+
     protected abstract void Interaction();
 
-    public virtual string DisplayFirstWay()
+    void IAction.Action()
     {
-        return $"I am a {nameof(InteractiveObject)} class method";
+        if (TryGetComponent(out Renderer renderer))
+        {
+            renderer.material.color = UnityEngine.Random.ColorHSV();
+        }
     }
 
-    public virtual string DisplaySecondWay()
+    void IInitialization.Action()
     {
-        return $"I am a {nameof(InteractiveObject)} class method";
+        if (TryGetComponent(out Renderer renderer))
+        {
+            renderer.material.color = Color.cyan;
+        }
     }
-    
-    public virtual string DisplayThirdWay()
+
+    public int CompareTo(InteractiveObject other)
     {
-        return $"I am a {nameof(InteractiveObject)} class method";
+        return name.CompareTo(other.name);
     }
 }

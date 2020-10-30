@@ -1,18 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyBody : MonoBehaviour
+
+namespace JevLogin
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class EnemyBody : MonoBehaviour, IDamagable
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public void AddDamage()
+        {
+            Debug.Log($"{name} damage");
+        }
+    } 
 }
