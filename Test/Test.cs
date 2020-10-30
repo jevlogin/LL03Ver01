@@ -9,19 +9,18 @@ namespace JevLogin
     {
         private void Start()
         {
-            int x = 1;
-            int y = 0;
             try
             {
-                int result = x / y;
+                int x = int.Parse("-3");
+                if (x < 0)
+                {
+                    throw new MyException("Введено недопостимое значение", x);
+                    Debug.Log("OK");
+                }
             }
-            catch (Exception ex) when (y == 0)
+            catch (MyException e)
             {
-                Debug.LogError($"y не должен быть равен нулю");
-            }
-            catch(Exception ex)
-            {
-                Debug.LogError($"{ex.Message}");
+                Debug.Log($"{e.Message} {e.Value}");
             }
         }
 
