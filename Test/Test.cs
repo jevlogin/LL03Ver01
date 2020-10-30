@@ -10,9 +10,12 @@ namespace JevLogin
     {
         private void Start()
         {
-            var example = new ActionDelegateExample();
-            example[UserAction.Up]();
-            example[UserAction.Down]();
+            var example = FindObjectOfType<PredicateAndFuncDelegateExample>();
+            example.Predicate = collision => collision.gameObject.CompareTag("Player");
+
+            const float damage = 50.0f;
+
+            example.Func = f => f - damage;
         }
     }
 }
