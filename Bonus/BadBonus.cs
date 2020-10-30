@@ -10,6 +10,9 @@ namespace JevLogin
         private float _lengthFlay;
         private float _speedRotation;
 
+        public delegate void CaughPlayerChange();
+        public CaughPlayerChange CaughPlayer;
+
         private void Awake()
         {
             _lengthFlay = Range(1.0f, 5.0f);
@@ -28,7 +31,7 @@ namespace JevLogin
 
         protected override void Interaction()
         {
-            //TODO Add bad bonus
+            CaughPlayer();
         }
 
         public object Clone()
