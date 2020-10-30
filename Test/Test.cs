@@ -14,6 +14,7 @@ namespace JevLogin
             DelegateObserver.Observer1 o1 = new DelegateObserver.Observer1();
             DelegateObserver.Observer2 o2 = new DelegateObserver.Observer2();
             DelegateObserver.MyDelegate d1 = new DelegateObserver.MyDelegate(o1.Do);
+            
             s.Add(d1);
             s.Add(o2.Do);
             s.Run();
