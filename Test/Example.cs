@@ -60,7 +60,7 @@ namespace JevLogin
         private Dictionary<string, Action> _actions;
 
 
-        private void NameMethod(string value)
+        public void NameMethod(string value)
         {
             _actions = new Dictionary<string, Action>
             {
@@ -72,40 +72,30 @@ namespace JevLogin
             if (beginInvoke.IsCompleted)
             {
 
-
             }
 
-            _actions[value].EndInvoke(beginInvoke);
+            _actions[value].EndInvoke(beginInvoke); //  Асинхронный метод
+
+
+            //_actions[value].Invoke();   //  Синхронный метод
 
             //  Dictionary заменяет весь switch
-
-            switch (value)
-            {
-                case "Move":
-                    Move();
-                    break;
-                case "Attack":
-                    Attack();
-                    break;
-                default:
-                    break;
-
-            }
+            
         }
 
         private void CallBack(IAsyncResult ar)
         {
-            throw new NotImplementedException();
+            Debug.Log($"CallBack");
         }
 
         private void Attack()
         {
-            throw new NotImplementedException();
+            Debug.Log($"Attack");
         }
 
         private void Move()
         {
-            throw new NotImplementedException();
+            Debug.Log($"Move");
         }
     }
 }

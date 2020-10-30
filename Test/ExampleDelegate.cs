@@ -9,10 +9,13 @@ namespace JevLogin
         {
             Example exampleDelegate = new Example();
 
-            exampleDelegate.Test();
-            exampleDelegate.StartDelegate();
-            exampleDelegate.RemoveDelegate(() => Debug.Log($"JEVLOGIN"));
-            exampleDelegate.StartDelegate();
+            //exampleDelegate.Test();
+            //exampleDelegate.StartDelegate();
+            //exampleDelegate.RemoveDelegate(() => Debug.Log($"JEVLOGIN"));
+            //exampleDelegate.StartDelegate();
+
+            exampleDelegate.NameMethod("Attack");
+
         }
     }
 }
