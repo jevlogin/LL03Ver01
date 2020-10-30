@@ -11,7 +11,13 @@ namespace JevLogin
         private float _speedRotation;
 
         public delegate void CaughPlayerChange(object value);
-        public event CaughPlayerChange CaughPlayer;
+        private event CaughPlayerChange _caughPlayer;
+        //  Полная реализация события
+        public event CaughPlayerChange CaughPlayer
+        {
+            add { _caughPlayer += value; }
+            remove { _caughPlayer -= value; }
+        }
 
         private void Awake()
         {
@@ -31,7 +37,7 @@ namespace JevLogin
 
         protected override void Interaction()
         {
-            CaughPlayer?.Invoke(this);
+            _caughPlayer?.Invoke(this);
         }
     }
 }

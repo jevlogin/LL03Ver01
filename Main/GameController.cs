@@ -24,7 +24,7 @@ namespace JevLogin
             }
         }
 
-        private void CaughPlayer()
+        private void CaughPlayer(object value)
         {
             Time.timeScale = 0.0f;
         }

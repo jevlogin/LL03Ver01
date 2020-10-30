@@ -13,7 +13,7 @@ namespace JevLogin
             _finishGameLabel.text = string.Empty;
         }
 
-        public void GameOver()
+        public void GameOver(object o)
         {
             _finishGameLabel.text = "Вы проиграли";
         }
