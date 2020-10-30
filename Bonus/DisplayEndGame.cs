@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace JevLogin
@@ -13,9 +14,10 @@ namespace JevLogin
             _finishGameLabel.text = string.Empty;
         }
 
-        public void GameOver(object o)
+        public void GameOver(object o, CaughtPlayerEventArgs args)
         {
-            _finishGameLabel.text = "Вы проиграли";
+            var text = $"Вы проиграли! Вас убил {o.GetType().Name} - {args.Color} цвета";
+            _finishGameLabel.text = text;
         }
     }
 }

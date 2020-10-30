@@ -24,7 +24,7 @@ namespace JevLogin
             }
         }
 
-        private void CaughPlayer(object value)
+        private void CaughPlayer(object value, CaughtPlayerEventArgs args)
         {
             Time.timeScale = 0.0f;
         }
@@ -62,12 +62,12 @@ namespace JevLogin
             {
                 if (interactableObject is InteractiveObject interactiveObject)
                 {
-                    Destroy(interactiveObject.gameObject);
                     if (interactableObject is BadBonus badBonus)
                     {
                         badBonus.CaughPlayer -= CaughPlayer;
                         badBonus.CaughPlayer -= _displayEndGame.GameOver;
                     }
+                    Destroy(interactiveObject.gameObject);
                 }
             }
         }

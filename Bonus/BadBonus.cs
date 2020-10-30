@@ -10,10 +10,8 @@ namespace JevLogin
         private float _lengthFlay;
         private float _speedRotation;
 
-        public delegate void CaughPlayerChange(object value);
-        private event CaughPlayerChange _caughPlayer;
-        //  Полная реализация события
-        public event CaughPlayerChange CaughPlayer
+        private event EventHandler<CaughtPlayerEventArgs> _caughPlayer;
+        public event EventHandler<CaughtPlayerEventArgs> CaughPlayer
         {
             add { _caughPlayer += value; }
             remove { _caughPlayer -= value; }
@@ -24,6 +22,11 @@ namespace JevLogin
             _lengthFlay = Range(1.0f, 5.0f);
             _speedRotation = Range(10.0f, 50.0f);
         }
+        
+        protected override void Interaction()
+        {
+            _caughPlayer?.Invoke(this, new CaughtPlayerEventArgs(_color));
+        }
 
         public void Flay()
         {
@@ -33,11 +36,6 @@ namespace JevLogin
         public void Rotation()
         {
             transform.Rotate(Vector3.up * (Time.deltaTime * _speedRotation), Space.World);
-        }
-
-        protected override void Interaction()
-        {
-            _caughPlayer?.Invoke(this);
         }
     }
 }

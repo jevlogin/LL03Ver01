@@ -1,19 +1,17 @@
 ﻿using JevLogin;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public abstract class InteractiveObject : MonoBehaviour, IInteractable, IComparable<InteractiveObject>
 {
-    public bool IsInteractable
-    {
-        get;
-    } = true;
+    public bool IsInteractable { get; } = true;
+    protected Color _color;
 
     private void Start()
     {
-        ((IAction)this).Action();
-        ((IInitialization)this).Action();
+        Action();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,31 +20,24 @@ public abstract class InteractiveObject : MonoBehaviour, IInteractable, ICompara
         {
             return;
         }
-        
+
         Interaction();
         Destroy(gameObject);
     }
 
     protected abstract void Interaction();
 
-    void IAction.Action()
-    {
-        if (TryGetComponent(out Renderer renderer))
-        {
-            renderer.material.color = UnityEngine.Random.ColorHSV();
-        }
-    }
-
-    void IInitialization.Action()
-    {
-        if (TryGetComponent(out Renderer renderer))
-        {
-            renderer.material.color = Color.cyan;
-        }
-    }
-
     public int CompareTo(InteractiveObject other)
     {
         return name.CompareTo(other.name);
+    }
+
+    public void Action()
+    {
+        _color = Random.ColorHSV();
+        if (TryGetComponent(out Renderer renderer))
+        {
+            renderer.material.color = _color;
+        }
     }
 }
