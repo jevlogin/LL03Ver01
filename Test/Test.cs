@@ -9,42 +9,28 @@ namespace JevLogin
     {
         private void Start()
         {
-            try // Контролируемый блок
-            {
-                Division(5, 0);
-            }
-            catch (FormatException) // Один или несколько блоков обработки исключений
-            {
-                Debug.Log($"Ошибка ввода данных");
-            }
-            catch (FileNotFoundException)
-            {
-                // Обработка исключения, возникшего при отсутствии файла
-            }
-            catch (IOException)
-            {
-                Debug.Log($"Ошибка ввода/вывода");
-            }
-            catch(Exception exc)
-            {
-                // Остальные исключения
-                Debug.Log($"Неизвестная ошибка");
-                Debug.Log($"Информация об ошибке" + exc.Message);
-            }
-            finally // Блок завершения
-            {
-               
-            }
+            Division("5", "1");
         }
 
-        private void Division(int v1, int v2)
+        private void Division(string inputA, string inputB)
         {
-            if (Convert.ToInt32(v2) == 0)
+            if (!Int32.TryParse(inputA, out var a))
             {
-                throw new Exception("Деление на ноль");
+                Debug.Log($"Плохое число {inputA}");
             }
-            var x = Convert.ToInt32(v1) / Convert.ToInt32(v2);
-            Debug.Log($"{v1} / {v2} = {x}");
+            else if (!Int32.TryParse(inputB, out var b))
+            {
+                Debug.Log($"Плохое число {inputB}");
+            }
+            else if (b == 0)
+            {
+                Debug.Log($"Деление на ноль {b}");
+            }
+            else
+            {
+                var x = a / b;
+                Debug.Log($"{a} / {b} = {x}");
+            }
         }
     }
 }
