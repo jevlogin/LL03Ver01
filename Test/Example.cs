@@ -7,10 +7,8 @@ namespace JevLogin
     {
         private void Start()
         {
-            ExampleEvent exampleEvent = new ExampleEvent();
-            exampleEvent.Test += () => { Debug.Log(121); };
-
-            exampleEvent.StartMethod();
+            var addComponent = TestCube.CreateTestCube(100);
+            addComponent.OnTriggerChange += i => { Debug.Log(i); };
 
             return;
             //ExampleDelegate exampleDelegate = new ExampleDelegate();
