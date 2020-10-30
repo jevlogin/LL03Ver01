@@ -16,7 +16,7 @@ namespace JevLogin
 
         public void GameOver(object sender, CaughtPlayerEventArgs args)
         {
-            var text = $"Вы проиграли! Вас убил {((InteractiveObject)sender).gameObject.name} - {args.Color} цвета";
+            var text = $"Вы проиграли! Вас убил {((InteractiveObject)sender).name} - {args.Color} цвета";
             _finishGameLabel.text = text;
         }
     }

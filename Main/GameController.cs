@@ -20,8 +20,8 @@ namespace JevLogin
                 {
                     badBonus.CaughPlayer += CaughPlayer;
                     badBonus.CaughPlayer += _displayEndGame.GameOver;
-                    badBonus.CaughPlayer += delegate (object sender, CaughtPlayerEventArgs args)
-                        { Debug.Log($"Вы проиграли. Вас убил {((InteractiveObject)sender).gameObject.name} {args.Color} цвета"); };
+                    badBonus.CaughPlayer += (sender, args) =>
+                        { Debug.Log($"Вы проиграли. Вас убил {((InteractiveObject)sender).name} {args.Color} цвета"); };
                 }
             }
         }
