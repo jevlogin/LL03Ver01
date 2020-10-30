@@ -5,13 +5,13 @@ using static UnityEngine.Random;
 
 namespace JevLogin
 {
-    public sealed class BadBonus : InteractiveObject, IFlay, IRotation, ICloneable
+    public sealed class BadBonus : InteractiveObject, IFlay, IRotation
     {
         private float _lengthFlay;
         private float _speedRotation;
 
-        public delegate void CaughPlayerChange();
-        public CaughPlayerChange CaughPlayer;
+        public delegate void CaughPlayerChange(object value);
+        public event CaughPlayerChange CaughPlayer;
 
         private void Awake()
         {
@@ -31,13 +31,7 @@ namespace JevLogin
 
         protected override void Interaction()
         {
-            CaughPlayer?.Invoke();
-        }
-
-        public object Clone()
-        {
-            var result = Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
-            return result;
+            CaughPlayer?.Invoke(this);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace JevLogin
 
         public sealed class Source
         {
-            private MyDelegate _functions;
+            private event MyDelegate _functions;
 
             public void Add(MyDelegate f)
             {
