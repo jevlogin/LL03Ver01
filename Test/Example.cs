@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -54,6 +55,44 @@ namespace JevLogin
         private void MyDelegate()
         {
             Debug.Log($"1");
+        }
+
+        private Dictionary<string, Action> _actions;
+
+
+        private void NameMethod(string value)
+        {
+            _actions = new Dictionary<string, Action>
+            {
+                ["Move"] = Move,
+                ["Attack"] = Attack
+            };
+            _actions[value].Invoke();
+
+            //  Dictionary заменяет весь switch
+
+            switch (value)
+            {
+                case "Move":
+                    Move();
+                    break;
+                case "Attack":
+                    Attack();
+                    break;
+                default:
+                    break;
+                
+            }
+        }
+
+        private void Attack()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Move()
+        {
+            throw new NotImplementedException();
         }
     }
 }
