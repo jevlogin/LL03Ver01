@@ -10,13 +10,6 @@ namespace JevLogin
         private float _lengthFlay;
         private float _speedRotation;
 
-        private event EventHandler<CaughtPlayerEventArgs> _caughPlayer;
-        public event EventHandler<CaughtPlayerEventArgs> CaughPlayer
-        {
-            add { _caughPlayer += value; }
-            remove { _caughPlayer -= value; }
-        }
-
         private void Awake()
         {
             _lengthFlay = Range(1.0f, 5.0f);
@@ -25,7 +18,7 @@ namespace JevLogin
         
         protected override void Interaction()
         {
-            _caughPlayer?.Invoke(this, new CaughtPlayerEventArgs(_color));
+            
         }
 
         public void Flay()

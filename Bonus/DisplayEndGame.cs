@@ -14,10 +14,9 @@ namespace JevLogin
             _finishGameLabel.text = string.Empty;
         }
 
-        public void GameOver(object sender, CaughtPlayerEventArgs args)
+        public void GameOver(object sender)
         {
-            var text = $"Вы проиграли! Вас убил {((InteractiveObject)sender).name} - {args.Color} цвета";
-            _finishGameLabel.text = text;
+            
         }
     }
 }

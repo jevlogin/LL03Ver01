@@ -4,73 +4,26 @@ using UnityEngine.UI;
 
 namespace JevLogin
 {
-    public sealed class GameController : MonoBehaviour, IDisposable
+    public sealed class GameController : MonoBehaviour
     {
-        [SerializeField] private Text _finishGameLabel;
-        private ListInteractableObject _interactableObject;
-        private DisplayEndGame _displayEndGame;
+        private ListExecuteObject _interactiveObject;
 
         private void Awake()
         {
-            _interactableObject = new ListInteractableObject();
-            _displayEndGame = new DisplayEndGame(_finishGameLabel);
-            foreach (var item in _interactableObject)
-            {
-                if (item is BadBonus badBonus)
-                {
-                    badBonus.CaughPlayer += CaughPlayer;
-                    badBonus.CaughPlayer += _displayEndGame.GameOver;
-                    badBonus.CaughPlayer += (sender, args) =>
-                        { Debug.Log($"Вы проиграли. Вас убил {((InteractiveObject)sender).name} {args.Color} цвета"); };
-                }
-            }
-        }
-
-        private void CaughPlayer(object value, CaughtPlayerEventArgs args)
-        {
-            Time.timeScale = 0.0f;
+            _interactiveObject = new ListExecuteObject();
         }
 
         private void Update()
         {
-            for (var i = 0; i < _interactableObject.Count; i++)
+            for (var i = 0; i < _interactiveObject.Length; i++)
             {
-                var interactableObject = _interactableObject[i];
+                var interactiveObject = _interactiveObject[i];
 
-                if (interactableObject == null)
+                if (interactiveObject == null)
                 {
                     continue;
                 }
-
-                if (interactableObject is IFlay flay)
-                {
-                    flay.Flay();
-                }
-                if (interactableObject is IFlicker flicker)
-                {
-                    flicker.Flicker();
-                }
-                if (interactableObject is IRotation rotation)
-                {
-                    rotation.Rotation();
-                }
-
-            }
-        }
-
-        public void Dispose()
-        {
-            foreach (var interactableObject in _interactableObject)
-            {
-                if (interactableObject is InteractiveObject interactiveObject)
-                {
-                    if (interactableObject is BadBonus badBonus)
-                    {
-                        badBonus.CaughPlayer -= CaughPlayer;
-                        badBonus.CaughPlayer -= _displayEndGame.GameOver;
-                    }
-                    Destroy(interactiveObject.gameObject);
-                }
+                interactiveObject.Execute();
             }
         }
     }

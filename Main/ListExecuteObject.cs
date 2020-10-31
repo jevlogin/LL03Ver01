@@ -51,6 +51,12 @@ namespace JevLogin
             _interactiveObjects[Length - 1] = execute;
         }
 
+        public IExecute this [int index]
+        {
+            get => _interactiveObjects[index];
+            private set => _interactiveObjects[index] = value;
+        }
+
         public IEnumerator GetEnumerator()
         {
             return this;
