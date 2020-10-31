@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 
@@ -9,13 +9,20 @@ namespace JevLogin
     {
         private void Start()
         {
-            var objects = new ListInteractableObject();
-
-            for (int i = 0; i < objects.Count; i++)
+            try
             {
-                print($"{objects[i]}");
+                int x = int.Parse("-3");
+                if (x < 0)
+                {
+                    throw new MyException("Введено недопостимое значение", x);
+                    Debug.Log("OK");
+                }
             }
-
+            catch (MyException e)
+            {
+                Debug.Log($"{e.Message} {e.Value}");
+            }
         }
+
     }
 }

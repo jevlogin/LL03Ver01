@@ -14,17 +14,12 @@ namespace JevLogin
         public float JumpHeight = 7.0f;
         public float MinDownRayCast = 0.15f;
 
-        private bool _isGround;
-
         #endregion
 
 
         #region UnityMethods
 
-        private void Start()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
+        private void Start() => _rigidbody = GetComponent<Rigidbody>();
 
         #endregion
 
@@ -52,10 +47,7 @@ namespace JevLogin
         }
 
 
-        public void Init(float value)
-        {
-            Speed = value;
-        }
+        public void Init(float value) => Speed = value;
 
         #endregion
     }
