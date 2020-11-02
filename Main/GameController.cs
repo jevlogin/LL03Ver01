@@ -25,11 +25,12 @@ namespace JevLogin
 
         private void Awake()
         {
-            _interactiveObject = new ListExecuteObject();
-            _displayEndGame = new DisplayEndGame();
-            _displayBonuses = new DisplayBonuses();
-
             var reference = new Reference();
+            
+            _interactiveObject = new ListExecuteObject();
+
+            _displayEndGame = new DisplayEndGame(reference.EndGame);
+            _displayEndGame = new DisplayEndGame(reference.Bonuse);
 
             PlayerBase player = null;
 
