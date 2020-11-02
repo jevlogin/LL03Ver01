@@ -11,6 +11,7 @@ namespace JevLogin
         private ListExecuteObject _interactiveObject;
         private DisplayEndGame _displayEndGame;
         private DisplayBonuses _displayBonuses;
+        private CameraController _cameraController;
 
         private int _countBonuses;
 
@@ -24,6 +25,12 @@ namespace JevLogin
             _interactiveObject = new ListExecuteObject();
             _displayEndGame = new DisplayEndGame();
             _displayBonuses = new DisplayBonuses();
+
+            var reference = new Reference();
+
+            _cameraController = new CameraController(reference.PlayerBall.transform, reference.CameraMain.transform);
+            _interactiveObject.AddExecuteObject(_cameraController);
+
             foreach (var soloObject in _interactiveObject)
             {
                 if (soloObject is BadBonus badBonus)

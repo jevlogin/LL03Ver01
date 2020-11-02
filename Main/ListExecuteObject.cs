@@ -40,7 +40,7 @@ namespace JevLogin
 
         #region Methods
 
-        private void AddExecuteObject(IExecute execute)
+        public void AddExecuteObject(IExecute execute)
         {
             if (_interactiveObjects == null)
             {
