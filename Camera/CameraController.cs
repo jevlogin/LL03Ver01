@@ -3,20 +3,37 @@
 
 namespace JevLogin
 {
-    public sealed class CameraController : MonoBehaviour
+    public sealed class CameraController : IExecute
     {
-        public Player Player;
+        #region Fields
 
+        private Transform _player;
+        private Transform _cameraMain;
         private Vector3 _offset;
 
-        private void Start()
+        #endregion
+
+
+        #region Properties
+
+        public CameraController(Transform player, Transform cameraMain)
         {
-            _offset = transform.position - Player.transform.position;
+            _player = player;
+            _cameraMain = cameraMain;
+            _cameraMain.LookAt(_player);
+            _offset = _cameraMain.position - _player.position;
         }
 
-        private void LateUpdate()
+        #endregion
+
+
+        #region IExecute
+
+        public void Execute()
         {
-            transform.position = Player.transform.position + _offset;
+            _cameraMain.position = _player.position + _offset;
         }
-    } 
+
+        #endregion
+    }
 }
