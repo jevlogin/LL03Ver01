@@ -1,22 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
+
 
 namespace JevLogin
 {
     public sealed class DisplayBonuses
     {
         private Text _text;
-        private static int _currentBonus = 0;
 
         public DisplayBonuses()
         {
-            _text = Object.FindObjectOfType<Text>();
+            //  будем грузить из кода. не знаю что 
         }
 
         public void Display(int value)
         {
-            _currentBonus += value;
-            _text.text = $"Вы набрали {_currentBonus}";
+            _text.text = $"Вы набрали {value}";
         }
     }
 }
