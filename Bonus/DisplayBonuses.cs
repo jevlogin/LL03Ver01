@@ -1,4 +1,6 @@
-﻿using UnityEngine.UI;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace JevLogin
@@ -7,21 +9,22 @@ namespace JevLogin
     {
         #region Fields
 
-        private Text _text;
+        private Text _bonuseLable;
 
         #endregion
 
 
         #region Methods
 
-        public DisplayBonuses()
+        public DisplayBonuses(GameObject bonus)
         {
-            //  будем грузить из кода. не знаю что 
+            _bonuseLable = bonus.GetComponentInChildren<Text>();
+            _bonuseLable.text = string.Empty;
         }
 
         public void Display(int value)
         {
-            _text.text = $"Вы набрали {value}";
+            _bonuseLable.text = $"Вы набрали {value}";
         }
 
         #endregion
