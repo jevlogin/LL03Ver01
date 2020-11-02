@@ -12,6 +12,7 @@ namespace JevLogin
         private DisplayEndGame _displayEndGame;
         private DisplayBonuses _displayBonuses;
         private CameraController _cameraController;
+        private InputController _inputController;
 
         private int _countBonuses;
 
@@ -30,6 +31,9 @@ namespace JevLogin
 
             _cameraController = new CameraController(reference.PlayerBall.transform, reference.CameraMain.transform);
             _interactiveObject.AddExecuteObject(_cameraController);
+
+            _inputController = new InputController(reference.PlayerBall);
+            _interactiveObject.AddExecuteObject(_inputController);
 
             foreach (var soloObject in _interactiveObject)
             {
