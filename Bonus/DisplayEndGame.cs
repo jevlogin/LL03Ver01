@@ -15,9 +15,10 @@ namespace JevLogin
 
         #region Methods
 
-        public DisplayEndGame()
+        public DisplayEndGame(GameObject endGame)
         {
-            // будем грузить из кода
+            _finishGameLabel = endGame.GetComponentInChildren<Text>();
+            _finishGameLabel.text = string.Empty;
         }
 
         public void GameOver(string name, Color color)
