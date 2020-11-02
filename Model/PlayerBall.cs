@@ -5,14 +5,30 @@ namespace JevLogin
 {
     public sealed class PlayerBall : PlayerBase
     {
-        private void Update()
+        #region Fields
+
+        private Rigidbody _rigidbody;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
         {
-            Jump();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        #endregion
+
+
+        #region Methods
+
+        public override void Move(float x, float y, float z)
         {
-            Move();
+            _rigidbody.AddForce(new Vector3(x, y, z) * Speed);
         }
+
+        #endregion
     }
 }
