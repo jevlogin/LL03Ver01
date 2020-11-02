@@ -8,6 +8,8 @@ namespace JevLogin
     {
         #region Fields
 
+        public PlayerType PlayerType = PlayerType.Ball;
+
         private ListExecuteObject _interactiveObject;
         private DisplayEndGame _displayEndGame;
         private DisplayBonuses _displayBonuses;
@@ -29,11 +31,21 @@ namespace JevLogin
 
             var reference = new Reference();
 
-            _cameraController = new CameraController(reference.PlayerBall.transform, reference.CameraMain.transform);
+            PlayerBase player = null;
+
+            if (PlayerType == PlayerType.Ball)
+            {
+                player = reference.PlayerBall;
+            }
+
+            _cameraController = new CameraController(player.transform, reference.CameraMain.transform);
             _interactiveObject.AddExecuteObject(_cameraController);
 
-            _inputController = new InputController(reference.PlayerBall);
-            _interactiveObject.AddExecuteObject(_inputController);
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                _inputController = new InputController(player);
+                _interactiveObject.AddExecuteObject(_inputController);
+            }
 
             foreach (var soloObject in _interactiveObject)
             {
