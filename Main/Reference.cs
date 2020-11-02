@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace JevLogin
 {
@@ -12,11 +12,25 @@ namespace JevLogin
         private Canvas _canvas;
         private GameObject _bonuse;
         private GameObject _endGame;
+        private Button _restartButton;
 
         #endregion
 
 
         #region Properties
+
+        public Button RestartButton
+        {
+            get
+            {
+                if (_restartButton == null)
+                {
+                    var restartButton = Resources.Load<Button>("UI/RestartButton");
+                    _restartButton = Object.Instantiate(restartButton, Canvas.transform);
+                }
+                return _restartButton;
+            }
+        }
 
         public Canvas Canvas
         {
