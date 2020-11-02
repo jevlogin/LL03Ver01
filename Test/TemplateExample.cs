@@ -7,7 +7,7 @@ namespace JevLogin
     {
         private void Start()
         {
-            var player = FactoryEnemy<Player, float>(777.0f);
+            var player = FactoryEnemy<PlayerBase, float>(777.0f);
             Display($"Speed = {player.Speed}");
         }
 

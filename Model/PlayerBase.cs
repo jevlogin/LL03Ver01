@@ -3,7 +3,7 @@
 
 namespace JevLogin
 {
-    public class Player : MonoBehaviour, IInit<float>
+    public class PlayerBase : MonoBehaviour, IInit<float>
     {
         #region Fields
 

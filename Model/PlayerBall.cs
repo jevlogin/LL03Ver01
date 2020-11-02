@@ -3,7 +3,7 @@
 
 namespace JevLogin
 {
-    public sealed class PlayerBall : Player
+    public sealed class PlayerBall : PlayerBase
     {
         private void Update()
         {
