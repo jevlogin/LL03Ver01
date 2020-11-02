@@ -43,6 +43,19 @@ namespace JevLogin
             }
         }
 
+        public GameObject EndGame
+        {
+            get
+            {
+                if (_endGame == null)
+                {
+                    var endObject = Resources.Load<GameObject>("UI/EndGame");
+                    _endGame = Object.Instantiate(endObject, Canvas.transform);
+                }
+                return _endGame;
+            }
+        }
+
         public PlayerBall PlayerBall
         {
             get
