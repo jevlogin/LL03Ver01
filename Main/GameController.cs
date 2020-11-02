@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace JevLogin
 {
@@ -15,8 +15,9 @@ namespace JevLogin
         private DisplayBonuses _displayBonuses;
         private CameraController _cameraController;
         private InputController _inputController;
+        private Reference _reference;
 
-        private int _countBonuses;
+        private int _countBonuses = 0;
 
         #endregion
 
@@ -25,21 +26,17 @@ namespace JevLogin
 
         private void Awake()
         {
-            var reference = new Reference();
-            
             _interactiveObject = new ListExecuteObject();
 
-            _displayEndGame = new DisplayEndGame(reference.EndGame);
-            _displayEndGame = new DisplayEndGame(reference.Bonuse);
+            _reference = new Reference();
 
             PlayerBase player = null;
-
             if (PlayerType == PlayerType.Ball)
             {
-                player = reference.PlayerBall;
+                player = _reference.PlayerBall;
             }
 
-            _cameraController = new CameraController(player.transform, reference.CameraMain.transform);
+            _cameraController = new CameraController(player.transform, _reference.CameraMain.transform);
             _interactiveObject.AddExecuteObject(_cameraController);
 
             if (Application.platform == RuntimePlatform.WindowsEditor)
@@ -47,6 +44,9 @@ namespace JevLogin
                 _inputController = new InputController(player);
                 _interactiveObject.AddExecuteObject(_inputController);
             }
+
+            _displayEndGame = new DisplayEndGame(_reference.EndGame);
+            _displayEndGame = new DisplayEndGame(_reference.Bonuse);
 
             foreach (var soloObject in _interactiveObject)
             {
@@ -62,8 +62,6 @@ namespace JevLogin
                 }
             }
         }
-
-
 
         private void Update()
         {
@@ -84,6 +82,12 @@ namespace JevLogin
 
         #region Methods
 
+        private void RestartGame()
+        {
+            SceneManager.LoadScene(0);
+            Time.timeScale = 1.0f;
+        }
+
         private void AddBonuse(int value)
         {
             _countBonuses += value;
@@ -92,6 +96,7 @@ namespace JevLogin
 
         private void CaughtPlayer(string value, Color arg)
         {
+            _reference.RestartButton.gameObject.SetActive(true);
             Time.timeScale = 0.0f;
         }
 
