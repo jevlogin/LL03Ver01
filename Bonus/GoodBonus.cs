@@ -52,6 +52,11 @@ namespace JevLogin
             return Point == other.Point;
         }
 
+        public override void Execute()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     } 
 }

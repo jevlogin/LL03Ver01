@@ -1,18 +1,45 @@
-﻿using System;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
+using static UnityEngine.Random;
 
 
 namespace JevLogin
 {
-    public abstract class InteractiveObject : MonoBehaviour, IComparable<InteractiveObject>
+    public abstract class InteractiveObject : MonoBehaviour, IExecute
     {
-        public bool IsInteractable { get; } = true;
+        #region Fields
+
         protected Color _color;
+        private bool _isInteractable; 
+
+        #endregion
+
+
+        #region Properties
+
+        public bool IsInteractable
+        {
+            get => _isInteractable;
+            set
+            {
+                _isInteractable = value;
+                GetComponent<Renderer>().enabled = _isInteractable;
+                GetComponent<Collider>().enabled = _isInteractable;
+            }
+        }
+
+        #endregion
+
+
+        #region UnityMethods
 
         private void Start()
         {
-            Action();
+            IsInteractable = true;
+            _color = ColorHSV();
+            if (TryGetComponent(out Renderer renderer))
+            {
+                renderer.material.color = _color;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -23,23 +50,22 @@ namespace JevLogin
             }
 
             Interaction();
-            Destroy(gameObject);
+            IsInteractable = false;
         }
 
-        protected abstract void Interaction();
+        #endregion
 
-        public int CompareTo(InteractiveObject other)
-        {
-            return name.CompareTo(other.name);
-        }
 
-        public void Action()
-        {
-            _color = Random.ColorHSV();
-            if (TryGetComponent(out Renderer renderer))
-            {
-                renderer.material.color = _color;
-            }
-        }
+        #region Methods
+
+        protected abstract void Interaction(); 
+
+        #endregion
+
+        #region IExecuteMethods
+
+        public abstract void Execute();
+
+        #endregion
     } 
 }

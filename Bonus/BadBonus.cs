@@ -18,7 +18,6 @@ namespace JevLogin
         
         protected override void Interaction()
         {
-            
         }
 
         public void Flay()
@@ -29,6 +28,10 @@ namespace JevLogin
         public void Rotation()
         {
             transform.Rotate(Vector3.up * (Time.deltaTime * _speedRotation), Space.World);
+        }
+
+        public override void Execute()
+        {
         }
     }
 }
