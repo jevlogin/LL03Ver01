@@ -5,7 +5,14 @@ namespace JevLogin
 {
     public sealed class DisplayBonuses
     {
+        #region Fields
+
         private Text _text;
+
+        #endregion
+
+
+        #region Methods
 
         public DisplayBonuses()
         {
@@ -16,5 +23,7 @@ namespace JevLogin
         {
             _text.text = $"Вы набрали {value}";
         }
+
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System.Drawing;
 using UnityEngine.UI;
 
 
@@ -6,17 +6,25 @@ namespace JevLogin
 {
     public sealed class DisplayEndGame
     {
+        #region Fields
+
         private Text _finishGameLabel;
 
-        public DisplayEndGame(Text finishGameLabel)
+        #endregion
+
+
+        #region Methods
+
+        public DisplayEndGame()
         {
-            _finishGameLabel = finishGameLabel;
-            _finishGameLabel.text = string.Empty;
+            // будем грузить из кода
         }
 
-        public void GameOver(object sender)
+        public void GameOver(string name, Color color)
         {
-            
+            _finishGameLabel.text = $"Вы проиграли! Вас убил {name} {color} цвета";
         }
+
+        #endregion
     }
 }
