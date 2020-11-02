@@ -1,17 +1,19 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.Random;
 
 
 namespace JevLogin
 {
-    public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker, IEquatable<GoodBonus>
+    public sealed class GoodBonus : InteractiveObject, IFlay, IFlicker
     {
         #region Fields
+
+        public event Action<int> OnPointChange = delegate (int i) { };
 
         public int Point;
 
         private Material _material;
-        private DisplayBonuses _displayBonuses;
 
         private float _lengthFlay;
 
@@ -22,15 +24,29 @@ namespace JevLogin
 
         private void Awake()
         {
-            _displayBonuses = new DisplayBonuses();
             _material = GetComponent<Renderer>().material;
-            _lengthFlay = UnityEngine.Random.Range(1.0f, 5.0f);
+            _lengthFlay = Range(1.0f, 5.0f);
         }
 
         #endregion
 
 
         #region Methods
+
+        protected override void Interaction()
+        {
+            OnPointChange.Invoke(Point);
+        }
+
+        public override void Execute()
+        {
+            if (!IsInteractable)
+            {
+                return;
+            }
+            Flay();
+            Flicker();
+        }
 
         public void Flay()
         {
@@ -42,21 +58,11 @@ namespace JevLogin
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, Mathf.PingPong(Time.time, 1.0f));
         }
 
-        protected override void Interaction()
-        {
-            _displayBonuses.Display(Point);
-        }
-
         public bool Equals(GoodBonus other)
         {
             return Point == other.Point;
         }
 
-        public override void Execute()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
-    } 
+    }
 }
