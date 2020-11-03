@@ -62,6 +62,9 @@ namespace JevLogin
                     goodBonus.OnPointChange += AddBonuse;
                 }
             }
+
+            _reference.RestartButton.onClick.AddListener(RestartGame);
+            _reference.RestartButton.gameObject.SetActive(false);
         }
 
         private void Update()

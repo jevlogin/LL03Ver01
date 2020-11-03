@@ -23,7 +23,7 @@ namespace JevLogin
 
         public void GameOver(string name, Color color)
         {
-            _finishGameLabel.text = $"Вы проиграли! Вас убил {name} {color} цвета";
+            _finishGameLabel.text = $"Вы проиграли! Вас убил {name} {ColorManager.ColorName[color]} цвета";
         }
 
         #endregion

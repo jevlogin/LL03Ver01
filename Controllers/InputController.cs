@@ -17,6 +17,7 @@ public sealed class InputController : IExecute
     {
         _playerBase = player;
     }
+
     #endregion
 
 

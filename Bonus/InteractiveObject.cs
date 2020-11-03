@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.Random;
 
 
@@ -41,7 +43,10 @@ namespace JevLogin
         private void Start()
         {
             IsInteractable = true;
-            _color = ColorHSV();
+            //_color = ColorHSV();
+
+            _color = ColorManager.GetValue(Range(0, 9));
+
             if (TryGetComponent(out Renderer renderer))
             {
                 renderer.material.color = _color;
