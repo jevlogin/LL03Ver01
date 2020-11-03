@@ -15,7 +15,6 @@ namespace JevLogin
         private DisplayBonuses _displayBonuses;
         private CameraController _cameraController;
         private InputController _inputController;
-        private RestartButton _restartButton;
         private Reference _reference;
 
         private int _countBonuses = 0;
@@ -60,11 +59,6 @@ namespace JevLogin
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
-                }
-
-                if (soloObject is RestartButton restartButton)
-                {
-                    restartButton.OnRestartButton += RestartGame;
                 }
             }
         }
@@ -120,11 +114,6 @@ namespace JevLogin
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange -= AddBonuse;
-                }
-
-                if (soloObject is RestartButton restartButton)
-                {
-                    restartButton.OnRestartButton -= RestartGame;
                 }
             }
         }

@@ -24,12 +24,10 @@ namespace JevLogin
                 _isInteractable = value;
                 if (TryGetComponent<Renderer>(out var renderer))
                 {
-                    //GetComponent<Renderer>().enabled = _isInteractable;
                     renderer.enabled = _isInteractable;
                 }
                 if (TryGetComponent<Collider>(out var collider))
                 {
-                    //GetComponent<Collider>().enabled = _isInteractable;
                     collider.enabled = _isInteractable;
                 }
             }
