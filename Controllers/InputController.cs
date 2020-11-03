@@ -24,7 +24,7 @@ public sealed class InputController : IExecute
 
     public void Execute()
     {
-        _playerBase.Move(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        _playerBase.Move(Input.GetAxis(AxisManager.HORIZONTAL), 0.0f, Input.GetAxis("Vertical"));
     }
 
     #endregion
