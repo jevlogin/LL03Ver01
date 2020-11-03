@@ -13,7 +13,6 @@ namespace JevLogin
         private ListExecuteObject _interactiveObject;
         private DisplayEndGame _displayEndGame;
         private DisplayBonuses _displayBonuses;
-        private RestartButton _restartButton;
         private CameraController _cameraController;
         private InputController _inputController;
         private Reference _reference;
@@ -48,7 +47,6 @@ namespace JevLogin
 
             _displayEndGame = new DisplayEndGame(_reference.EndGame);
             _displayBonuses = new DisplayBonuses(_reference.Bonuse);
-            _restartButton = new RestartButton(_reference.RestartButton);
 
             foreach (var soloObject in _interactiveObject)
             {
@@ -56,7 +54,7 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
-                    badBonus.OnRestartGame += _restartButton.RestartGame;
+                    badBonus.OnRestartGame += RestartGame;
                 }
 
                 if (soloObject is GoodBonus goodBonus)
@@ -68,6 +66,10 @@ namespace JevLogin
 
         private void Update()
         {
+            if (_interactiveObject == null)
+            {
+                return;
+            }
             for (var i = 0; i < _interactiveObject.Length; i++)
             {
                 var interactiveObject = _interactiveObject[i];
@@ -112,7 +114,7 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange -= CaughtPlayer;
                     badBonus.OnCaughtPlayerChange -= _displayEndGame.GameOver;
-                    badBonus.OnRestartGame -= _restartButton.RestartGame;
+                    badBonus.OnRestartGame -= RestartGame;
                 }
 
                 if (soloObject is GoodBonus goodBonus)
