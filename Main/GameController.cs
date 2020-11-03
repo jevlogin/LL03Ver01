@@ -15,6 +15,7 @@ namespace JevLogin
         private DisplayBonuses _displayBonuses;
         private CameraController _cameraController;
         private InputController _inputController;
+        private RestartButton _restartButton;
         private Reference _reference;
 
         private int _countBonuses = 0;
@@ -46,7 +47,7 @@ namespace JevLogin
             }
 
             _displayEndGame = new DisplayEndGame(_reference.EndGame);
-            _displayEndGame = new DisplayEndGame(_reference.Bonuse);
+            _displayBonuses = new DisplayBonuses(_reference.Bonuse);
 
             foreach (var soloObject in _interactiveObject)
             {
@@ -59,6 +60,11 @@ namespace JevLogin
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
+                }
+
+                if (soloObject is RestartButton restartButton)
+                {
+                    restartButton.OnRestartButton += RestartGame;
                 }
             }
         }
@@ -84,6 +90,7 @@ namespace JevLogin
 
         private void RestartGame()
         {
+            Debug.Log($"Перезагрузка. {name}");
             SceneManager.LoadScene(0);
             Time.timeScale = 1.0f;
         }
@@ -113,6 +120,11 @@ namespace JevLogin
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange -= AddBonuse;
+                }
+
+                if (soloObject is RestartButton restartButton)
+                {
+                    restartButton.OnRestartButton -= RestartGame;
                 }
             }
         }

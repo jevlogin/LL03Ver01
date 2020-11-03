@@ -9,7 +9,7 @@ namespace JevLogin
         #region Fields
 
         protected Color _color;
-        private bool _isInteractable; 
+        private bool _isInteractable;
 
         #endregion
 
@@ -22,8 +22,16 @@ namespace JevLogin
             set
             {
                 _isInteractable = value;
-                GetComponent<Renderer>().enabled = _isInteractable;
-                GetComponent<Collider>().enabled = _isInteractable;
+                if (TryGetComponent<Renderer>(out var renderer))
+                {
+                    //GetComponent<Renderer>().enabled = _isInteractable;
+                    renderer.enabled = _isInteractable;
+                }
+                if (TryGetComponent<Collider>(out var collider))
+                {
+                    //GetComponent<Collider>().enabled = _isInteractable;
+                    collider.enabled = _isInteractable;
+                }
             }
         }
 
@@ -58,7 +66,7 @@ namespace JevLogin
 
         #region Methods
 
-        protected abstract void Interaction(); 
+        protected abstract void Interaction();
 
         #endregion
 
@@ -68,5 +76,5 @@ namespace JevLogin
         public abstract void Execute();
 
         #endregion
-    } 
+    }
 }
