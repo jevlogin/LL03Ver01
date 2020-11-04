@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -20,6 +19,7 @@ namespace JevLogin
         {
             _bonuseLable = bonus.GetComponentInChildren<Text>();
             _bonuseLable.text = string.Empty;
+            _bonuseLable.color = Color.green;
         }
 
         public void Display(int value)

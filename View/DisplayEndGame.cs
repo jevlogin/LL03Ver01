@@ -19,6 +19,7 @@ namespace JevLogin
         {
             _finishGameLabel = endGame.GetComponentInChildren<Text>();
             _finishGameLabel.text = string.Empty;
+            _finishGameLabel.color = Color.red;
         }
 
         public void GameOver(string name, Color color)

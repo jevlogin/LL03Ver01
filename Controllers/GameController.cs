@@ -92,7 +92,6 @@ namespace JevLogin
 
         private void RestartGame()
         {
-            Debug.Log($"Перезагрузка. {name}");
             SceneManager.LoadScene(0);
             Time.timeScale = 1.0f;
         }

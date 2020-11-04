@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,6 +6,8 @@ namespace JevLogin
 {
     public static class ColorManager
     {
+        #region Fields
+
         private static string[] _colorName =
         {
             "clear",
@@ -38,6 +39,11 @@ namespace JevLogin
         public static Dictionary<int, Color> ColorDictionary;
         public static Dictionary<Color, string> ColorName;
 
+        #endregion
+
+
+        #region Properties
+
         static ColorManager()
         {
             ColorDictionary = new Dictionary<int, Color>();
@@ -53,10 +59,17 @@ namespace JevLogin
             }
         }
 
+        #endregion
+
+
+        #region Methods
+
         public static Color GetValue(int a)
         {
             var color = ColorDictionary[a];
             return color;
         }
+
+        #endregion
     }
 }
