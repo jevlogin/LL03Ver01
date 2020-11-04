@@ -13,11 +13,25 @@ namespace JevLogin
         private GameObject _bonuse;
         private GameObject _endGame;
         private Button _restartButton;
+        private Ghost _ghost;
 
         #endregion
 
 
         #region Properties
+
+        public Ghost Ghost
+        {
+            get
+            {
+                if (_ghost == null)
+                {
+                    var ghost = Resources.Load<Ghost>("Ghost");
+                    _ghost = Object.Instantiate(ghost);
+                }
+                return _ghost;
+            }
+        }
 
         public Button RestartButton
         {

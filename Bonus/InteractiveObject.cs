@@ -43,7 +43,6 @@ namespace JevLogin
         private void Start()
         {
             IsInteractable = true;
-            //_color = ColorHSV();
 
             _color = ColorManager.GetValue(Range(0, 9));
 

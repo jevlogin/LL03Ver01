@@ -29,7 +29,7 @@ namespace JevLogin
         #endregion
 
 
-        #region Methods
+        #region IExecute
 
         public override void Execute()
         {
@@ -40,6 +40,11 @@ namespace JevLogin
             Flay();
             Rotation();
         }
+
+        #endregion
+
+
+        #region Methods
 
         protected override void Interaction()
         {
