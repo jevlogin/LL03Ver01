@@ -15,8 +15,9 @@ namespace JevLogin
         private int _currentWaypointIndex;
 
         [SerializeField] private Vector4 _sizeOfPlatform;
-        [SerializeField] private Transform _transformGround;
         [SerializeField] private GameObject _prefab;
+        
+        private Transform _transformGround;
 
         private void Awake()
         {
@@ -24,7 +25,7 @@ namespace JevLogin
             {
                 _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
             }
-            GenerateVector4ToGameObject();
+            GenerateVector4ToGameObject(_transformGround);
         }
 
         private void Start()
@@ -51,7 +52,7 @@ namespace JevLogin
             _waypoints[_waypoints.Length - 1] = GeneratePoint();
         }
 
-        private void GenerateVector4ToGameObject()
+        private void GenerateVector4ToGameObject(Transform _transformGround)
         {
             var x = _transformGround.localPosition.x;
             var z = _transformGround.localPosition.z;
