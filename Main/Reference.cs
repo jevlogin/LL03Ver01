@@ -27,7 +27,7 @@ namespace JevLogin
                 if (_ghost == null)
                 {
                     var ghost = Resources.Load<Ghost>("Ghost");
-                    _ghost = Object.Instantiate(ghost);
+                    _ghost = new Ghost(ghost);
                 }
                 return _ghost;
             }

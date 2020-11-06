@@ -3,10 +3,7 @@
 
 public class GenerateVectorController
 {
-    private Transform _transform;
-    private Transform[] _transforms;
     private Vector4 _sizeOfPlatform;
-    private Transform _transformGround;
 
     public Vector4 GenerateVector4ToGameObject(Transform _transformGround)
     {
@@ -25,21 +22,6 @@ public class GenerateVectorController
 
         return _sizeOfPlatform;
     }
-
-    /*
-    private Transform[] GenerateWaypoints(Transform[] _waypoints)
-    {
-        if (_waypoints == null || _waypoints.Length == 0)
-        {
-            _waypoints = new[] { GetVector3GeneratePoint() };
-        }
-
-        Array.Resize(ref _waypoints, _waypoints.Length + 1);
-        _waypoints[_waypoints.Length - 1] = GetVector3GeneratePoint();
-
-        return _waypoints;
-    }*/
-
 
     public Vector3 GetVector3GeneratePoint()
     {

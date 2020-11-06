@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.ProBuilder;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
+
 
 namespace JevLogin
 {
@@ -17,8 +15,12 @@ namespace JevLogin
         private Transform _transformGround;
         private GenerateVectorController _generateVectorController;
         private Vector4 _sizeOfPlatform;
+        private Ghost _ghost;
 
-
+        public Ghost(Ghost ghost)
+        {
+            _ghost = Instantiate(ghost);
+        }
 
         private void Awake()
         {
@@ -34,9 +36,13 @@ namespace JevLogin
 
         private void Start()
         {
+            var vectorA = _generateVectorController.GetVector3GeneratePoint();
+
+            _ghost.transform.position = vectorA;
+
             if (_navMeshAgent == null)
             {
-                _navMeshAgent = GetComponent<NavMeshAgent>();
+                _navMeshAgent = _ghost.GetComponent<NavMeshAgent>();
             }
 
             var pointSpawn = _generateVectorController.GetVector3GeneratePoint();
@@ -53,11 +59,27 @@ namespace JevLogin
             }
 
             //GenerateWaypoints(ref _waypoints);
+            GenerateWayPoints();
 
             _navMeshAgent.SetDestination(_waypoints[0]);
 
         }
 
+        private void GenerateWayPoints()
+        {
+            if (_waypoints == null || _waypoints.Length == 0)
+            {
+                _waypoints = new[] { _generateVectorController.GetVector3GeneratePoint() };
+            }
+
+            Array.Resize(ref _waypoints, _waypoints.Length + 1);
+            _waypoints[_waypoints.Length - 1] = _generateVectorController.GetVector3GeneratePoint();
+            if (_waypoints[_waypoints.Length - 1].Equals(_waypoints[_waypoints.Length - 2]))
+            {
+                Debug.Log($"точки равны {_waypoints[_waypoints.Length - 1]} and {_waypoints[_waypoints.Length - 2]}");
+                _waypoints[_waypoints.Length - 1] = _generateVectorController.GetVector3GeneratePoint();
+            }
+        }
 
         public override void Execute()
         {
