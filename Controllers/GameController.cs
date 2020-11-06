@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,10 +54,11 @@ namespace JevLogin
                 _interactiveObject.AddExecuteObject(phirstGhost);
             }
 
+
             for (int i = 0; i < CountEnemy; i++)
             {
-                var ghost = Instantiate(_reference.Ghost);
-                ghost.transform.position = ghost.GeneratePoint();
+                var tp = _reference.Ghost.GeneratePoint();
+                var ghost = Instantiate(_reference.Ghost, tp, Quaternion.identity);
                 _interactiveObject.AddExecuteObject(ghost);
             }
 
@@ -80,6 +82,7 @@ namespace JevLogin
             _reference.RestartButton.onClick.AddListener(RestartGame);
             _reference.RestartButton.gameObject.SetActive(false);
         }
+
 
         private void Update()
         {

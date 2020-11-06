@@ -32,8 +32,6 @@ namespace JevLogin
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
-                _navMeshAgent.autoRepath = true;
-
             }
 
             GenerateWaypoints();
