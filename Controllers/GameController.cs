@@ -47,11 +47,10 @@ namespace JevLogin
                 _interactiveObject.AddExecuteObject(_inputController);
             }
 
-            var phirstGhost = _reference.Ghost;
 
             if (_reference.Ghost)
             {
-                _interactiveObject.AddExecuteObject(phirstGhost);
+                _interactiveObject.AddExecuteObject(_reference.Ghost);
             }
 
 
