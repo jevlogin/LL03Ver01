@@ -10,7 +10,6 @@ namespace JevLogin
         #region Fields
 
         public event Action<string, Color> OnCaughtPlayerChange = delegate (string str, Color color) { };
-        public event Action OnRestartGame = delegate () { };
 
         private float _lengthFlay;
         private float _speedRotation;

@@ -9,6 +9,7 @@ namespace JevLogin
         #region Fields
 
         public PlayerType PlayerType = PlayerType.Ball;
+        public int CountEnemy = 3;
 
         private ListExecuteObject _interactiveObject;
         private DisplayEndGame _displayEndGame;
@@ -54,7 +55,6 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
-                    badBonus.OnRestartGame += RestartGame;
                 }
 
                 if (soloObject is GoodBonus goodBonus)
@@ -92,6 +92,8 @@ namespace JevLogin
 
         private void RestartGame()
         {
+            _reference.RestartButton.onClick.RemoveAllListeners();
+            Dispose();
             SceneManager.LoadScene(0);
             Time.timeScale = 1.0f;
         }
@@ -116,7 +118,6 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange -= CaughtPlayer;
                     badBonus.OnCaughtPlayerChange -= _displayEndGame.GameOver;
-                    badBonus.OnRestartGame -= RestartGame;
                 }
 
                 if (soloObject is GoodBonus goodBonus)
