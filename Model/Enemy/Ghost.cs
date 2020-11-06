@@ -18,6 +18,12 @@ namespace JevLogin
         [SerializeField] private GameObject _prefab;
         
         private Transform _transformGround;
+        private Ghost _ghost;
+
+        public Ghost(Ghost ghost)
+        {
+            _ghost = Instantiate(ghost);
+        }
 
         private void Awake()
         {
@@ -25,7 +31,7 @@ namespace JevLogin
             {
                 _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
             }
-            GenerateVector4ToGameObject(_transformGround);
+            GenerateVector4ToGameObject(ref _transformGround);
         }
 
         private void Start()
@@ -35,24 +41,28 @@ namespace JevLogin
                 _navMeshAgent = GetComponent<NavMeshAgent>();
             }
 
-            GenerateWaypoints();
+            GenerateWaypoints(ref _waypoints);
 
             _navMeshAgent.SetDestination(_waypoints[0]);
 
         }
 
-        private void GenerateWaypoints()
+        private void GenerateWaypoints(ref Vector3[] _waypoints)
         {
             if (_waypoints == null || _waypoints.Length == 0)
             {
                 _waypoints = new[] { GeneratePoint() };
+            }
+            else if (_waypoints.Length <= 1)
+            {
+                _waypoints[0] = GeneratePoint();
             }
 
             Array.Resize(ref _waypoints, _waypoints.Length + 1);
             _waypoints[_waypoints.Length - 1] = GeneratePoint();
         }
 
-        private void GenerateVector4ToGameObject(Transform _transformGround)
+        private void GenerateVector4ToGameObject(ref Transform _transformGround)
         {
             var x = _transformGround.localPosition.x;
             var z = _transformGround.localPosition.z;

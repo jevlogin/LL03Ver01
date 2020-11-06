@@ -6,6 +6,16 @@ public class GenerateVectorController : MonoBehaviour
     private Transform _transform;
     private Transform[] _transforms;
     private Vector4 _sizeOfPlatform;
+    private Transform _transformGround;
+
+    private void Awake()
+    {
+        if (_transformGround == null)
+        {
+            _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
+            print($"_transformGround найден {_transformGround}");
+        }
+    }
 
     private void GenerateVector4ToGameObject(Transform _transformGround)
     {
@@ -22,9 +32,9 @@ public class GenerateVectorController : MonoBehaviour
         //var bounds = _transformGround.GetComponent<MeshFilter>().sharedMesh.bounds;
     }
 
+    /*
     private Transform[] GenerateWaypoints(Transform[] _waypoints)
     {
-        Transform[] transforms = GameObject.Instantiate();
         if (_waypoints == null || _waypoints.Length == 0)
         {
             _waypoints = new[] { GeneratePoint() };
@@ -35,9 +45,9 @@ public class GenerateVectorController : MonoBehaviour
 
         return _waypoints;
     }
+    */
 
-
-
+    /*
     public Vector3 GeneratePoint()
     {
         Vector3 result = Vector3.one;
@@ -62,4 +72,7 @@ public class GenerateVectorController : MonoBehaviour
 
         return result;
     }
+
+    */
+
 }
