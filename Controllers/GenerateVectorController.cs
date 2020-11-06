@@ -37,21 +37,20 @@ public class GenerateVectorController : MonoBehaviour
     {
         if (_waypoints == null || _waypoints.Length == 0)
         {
-            _waypoints = new[] { GeneratePoint() };
+            _waypoints = new[] { GetVector3GeneratePoint() };
         }
 
         Array.Resize(ref _waypoints, _waypoints.Length + 1);
-        _waypoints[_waypoints.Length - 1] = GeneratePoint();
+        _waypoints[_waypoints.Length - 1] = GetVector3GeneratePoint();
 
         return _waypoints;
-    }
-    */
+    }*/
 
-    /*
-    public Vector3 GeneratePoint()
+
+    public Vector3 GetVector3GeneratePoint()
     {
         Vector3 result = Vector3.one;
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 100; i++)
         {
             var x = Random.Range(_sizeOfPlatform.x - (_sizeOfPlatform.z / 2), _sizeOfPlatform.x + (_sizeOfPlatform.z / 2));
             var y = 0.5f;
@@ -62,17 +61,22 @@ public class GenerateVectorController : MonoBehaviour
             //Debug.Log($"i: {i}, numColliders: {numColliders}");
             if (numColliders == 1)
             {
-                var ct = Instantiate(_prefab, checkPoint, Quaternion.identity);
+                var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                var ct = Instantiate(cube, checkPoint, Quaternion.identity);
+                ct.GetComponent<BoxCollider>().isTrigger = true;
+
                 ct.name = name + checkPoint;
                 return checkPoint;
             }
         }
 
-        Instantiate(_prefab, result, Quaternion.identity);
+        var cubeNegative = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cubeNegative.GetComponent<BoxCollider>().isTrigger = true;
+        Instantiate(cubeNegative, result, Quaternion.identity);
 
-        return result;
+        return GetVector3GeneratePoint();
     }
 
-    */
 
 }

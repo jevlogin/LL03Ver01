@@ -14,24 +14,19 @@ namespace JevLogin
 
         private int _currentWaypointIndex;
 
-        [SerializeField] private Vector4 _sizeOfPlatform;
-        [SerializeField] private GameObject _prefab;
-        
-        private Transform _transformGround;
         private Ghost _ghost;
 
-        public Ghost(Ghost ghost)
+        public Ghost(Ghost ghost, Vector3 pointSpawn)
         {
             _ghost = Instantiate(ghost);
-        }
-
-        private void Awake()
-        {
-            if (_transformGround == null)
+            if (_waypoints == null || _waypoints.Length == 0)
             {
-                _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
+                _waypoints = new[] { pointSpawn };
             }
-            GenerateVector4ToGameObject(ref _transformGround);
+            else if (_waypoints.Length == 1)
+            {
+                _waypoints[0] = pointSpawn;
+            }
         }
 
         private void Start()
@@ -41,62 +36,13 @@ namespace JevLogin
                 _navMeshAgent = GetComponent<NavMeshAgent>();
             }
 
-            GenerateWaypoints(ref _waypoints);
+
+            //GenerateWaypoints(ref _waypoints);
 
             _navMeshAgent.SetDestination(_waypoints[0]);
 
         }
 
-        private void GenerateWaypoints(ref Vector3[] _waypoints)
-        {
-            if (_waypoints == null || _waypoints.Length == 0)
-            {
-                _waypoints = new[] { GeneratePoint() };
-            }
-            else if (_waypoints.Length <= 1)
-            {
-                _waypoints[0] = GeneratePoint();
-            }
-
-            Array.Resize(ref _waypoints, _waypoints.Length + 1);
-            _waypoints[_waypoints.Length - 1] = GeneratePoint();
-        }
-
-        private void GenerateVector4ToGameObject(ref Transform _transformGround)
-        {
-            var x = _transformGround.localPosition.x;
-            var z = _transformGround.localPosition.z;
-            var bounds = _transformGround.GetComponent<MeshFilter>().sharedMesh.bounds;
-            _sizeOfPlatform.x = x + bounds.center.x;
-            _sizeOfPlatform.y = z + bounds.center.z;
-            _sizeOfPlatform.z = bounds.size.x;
-            _sizeOfPlatform.w = bounds.size.z;
-        }
-
-        public Vector3 GeneratePoint()
-        {
-            Vector3 result = Vector3.one;
-            for (int i = 0; i < 50; i++)
-            {
-                var x = Random.Range(_sizeOfPlatform.x - (_sizeOfPlatform.z / 2), _sizeOfPlatform.x + (_sizeOfPlatform.z / 2));
-                var y = 0.5f;
-                var z = Random.Range(_sizeOfPlatform.y - (_sizeOfPlatform.w / 2), _sizeOfPlatform.y + (_sizeOfPlatform.w / 2));
-                var checkPoint = new Vector3(x, y, z);
-                var _ = new Collider[2];
-                int numColliders = Physics.OverlapSphereNonAlloc(checkPoint, 2.0f, _);
-                //Debug.Log($"i: {i}, numColliders: {numColliders}");
-                if (numColliders == 1)
-                {
-                    var ct = Instantiate(_prefab, checkPoint, Quaternion.identity);
-                    ct.name = name + checkPoint;
-                    return checkPoint;
-                }
-            }
-
-            Instantiate(_prefab, result, Quaternion.identity);
-
-            return result;
-        }
 
         public override void Execute()
         {

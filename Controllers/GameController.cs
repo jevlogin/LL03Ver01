@@ -60,8 +60,11 @@ namespace JevLogin
                 {
                     _ghostsList = new List<Ghost>();
                 }
+                var pointSpawn = _generateVectorController.GetVector3GeneratePoint();
 
-                var ghost = new Ghost(_reference.Ghost);
+                print($"Получена точка {pointSpawn}");
+
+                var ghost = new Ghost(_reference.Ghost, pointSpawn);
 
                 _ghostsList.Add(ghost);
             }
