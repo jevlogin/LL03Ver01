@@ -32,6 +32,8 @@ namespace JevLogin
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
+                _navMeshAgent.autoRepath = true;
+
             }
 
             GenerateWaypoints();
@@ -65,7 +67,7 @@ namespace JevLogin
         public Vector3 GeneratePoint()
         {
             Vector3 result = Vector3.one;
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var x = Random.Range(_sizeOfPlatform.x - (_sizeOfPlatform.z / 2), _sizeOfPlatform.x + (_sizeOfPlatform.z / 2));
                 var y = 0.5f;
@@ -89,7 +91,7 @@ namespace JevLogin
 
         public override void Execute()
         {
-            if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            if ((_navMeshAgent.destination - transform.position).sqrMagnitude <= _navMeshAgent.stoppingDistance * _navMeshAgent.stoppingDistance)
             {
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
                 _navMeshAgent.SetDestination(_waypoints[_currentWaypointIndex]);

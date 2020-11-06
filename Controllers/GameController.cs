@@ -46,6 +46,20 @@ namespace JevLogin
                 _interactiveObject.AddExecuteObject(_inputController);
             }
 
+            var phirstGhost = _reference.Ghost;
+
+            if (_reference.Ghost)
+            {
+                _interactiveObject.AddExecuteObject(phirstGhost);
+            }
+
+            for (int i = 0; i < CountEnemy; i++)
+            {
+                var ghost = Instantiate(_reference.Ghost);
+                ghost.transform.position = ghost.GeneratePoint();
+                _interactiveObject.AddExecuteObject(ghost);
+            }
+
             _displayEndGame = new DisplayEndGame(_reference.EndGame);
             _displayBonuses = new DisplayBonuses(_reference.Bonuse);
 
