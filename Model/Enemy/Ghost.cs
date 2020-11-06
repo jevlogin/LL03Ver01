@@ -14,19 +14,22 @@ namespace JevLogin
 
         private int _currentWaypointIndex;
 
-        private Ghost _ghost;
+        private Transform _transformGround;
+        private GenerateVectorController _generateVectorController;
+        private Vector4 _sizeOfPlatform;
 
-        public Ghost(Ghost ghost, Vector3 pointSpawn)
+
+
+        private void Awake()
         {
-            _ghost = Instantiate(ghost);
-            if (_waypoints == null || _waypoints.Length == 0)
+            if (_transformGround == null)
             {
-                _waypoints = new[] { pointSpawn };
+                _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
+                Debug.Log($"_transformGround найден {_transformGround}");
             }
-            else if (_waypoints.Length == 1)
-            {
-                _waypoints[0] = pointSpawn;
-            }
+            _generateVectorController = new GenerateVectorController();
+            _sizeOfPlatform = _generateVectorController.GenerateVector4ToGameObject(_transformGround);
+            Debug.Log($"Vector4 _sizeOfPlatform = {_sizeOfPlatform}");
         }
 
         private void Start()
@@ -36,6 +39,18 @@ namespace JevLogin
                 _navMeshAgent = GetComponent<NavMeshAgent>();
             }
 
+            var pointSpawn = _generateVectorController.GetVector3GeneratePoint();
+
+            print(pointSpawn);
+
+            if (_waypoints == null || _waypoints.Length == 0)
+            {
+                _waypoints = new[] { pointSpawn };
+            }
+            else if (_waypoints.Length == 1)
+            {
+                _waypoints[0] = pointSpawn;
+            }
 
             //GenerateWaypoints(ref _waypoints);
 

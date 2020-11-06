@@ -1,27 +1,19 @@
 ﻿using UnityEngine;
 
 
-public class GenerateVectorController : MonoBehaviour
+public class GenerateVectorController
 {
     private Transform _transform;
     private Transform[] _transforms;
     private Vector4 _sizeOfPlatform;
     private Transform _transformGround;
 
-    private void Awake()
-    {
-        if (_transformGround == null)
-        {
-            _transformGround = GameObject.FindGameObjectWithTag("Ground").transform;
-            print($"_transformGround найден {_transformGround}");
-        }
-    }
-
-    private void GenerateVector4ToGameObject(Transform _transformGround)
+    public Vector4 GenerateVector4ToGameObject(Transform _transformGround)
     {
         var x = _transformGround.localPosition.x;
         var z = _transformGround.localPosition.z;
-        if (TryGetComponent<MeshFilter>(out MeshFilter meshFilter))
+
+        if (_transformGround.TryGetComponent(out MeshFilter meshFilter))
         {
             var bounds = meshFilter.sharedMesh.bounds;
             _sizeOfPlatform.x = x + bounds.center.x;
@@ -30,6 +22,8 @@ public class GenerateVectorController : MonoBehaviour
             _sizeOfPlatform.w = bounds.size.z;
         }
         //var bounds = _transformGround.GetComponent<MeshFilter>().sharedMesh.bounds;
+
+        return _sizeOfPlatform;
     }
 
     /*
@@ -62,20 +56,20 @@ public class GenerateVectorController : MonoBehaviour
             if (numColliders == 1)
             {
                 var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.position = checkPoint;
+                cube.GetComponent<BoxCollider>().isTrigger = true;
 
-                var ct = Instantiate(cube, checkPoint, Quaternion.identity);
-                ct.GetComponent<BoxCollider>().isTrigger = true;
-
-                ct.name = name + checkPoint;
+                cube.name += checkPoint;
                 return checkPoint;
             }
         }
 
         var cubeNegative = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cubeNegative.GetComponent<BoxCollider>().isTrigger = true;
-        Instantiate(cubeNegative, result, Quaternion.identity);
+        cubeNegative.transform.position = result;
+        cubeNegative.name += result;
 
-        return GetVector3GeneratePoint();
+        return result;
     }
 
 
