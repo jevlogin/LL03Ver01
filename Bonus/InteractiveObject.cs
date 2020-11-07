@@ -1,43 +1,82 @@
-﻿using JevLogin;
-using System;
+﻿using UnityEditor;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Rendering;
+using static UnityEngine.Random;
 
 
-public abstract class InteractiveObject : MonoBehaviour, IInteractable, IComparable<InteractiveObject>
+namespace JevLogin
 {
-    public bool IsInteractable { get; } = true;
-    protected Color _color;
-
-    private void Start()
+    public abstract class InteractiveObject : MonoBehaviour, IExecute
     {
-        Action();
-    }
+        #region Fields
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!IsInteractable || !other.CompareTag("Player"))
+        protected Color _color;
+        private bool _isInteractable;
+
+        #endregion
+
+
+        #region Properties
+
+        public bool IsInteractable
         {
-            return;
+            get => _isInteractable;
+            set
+            {
+                _isInteractable = value;
+                if (TryGetComponent<Renderer>(out var renderer))
+                {
+                    renderer.enabled = _isInteractable;
+                }
+                if (TryGetComponent<Collider>(out var collider))
+                {
+                    collider.enabled = _isInteractable;
+                }
+            }
         }
 
-        Interaction();
-        Destroy(gameObject);
-    }
+        #endregion
 
-    protected abstract void Interaction();
 
-    public int CompareTo(InteractiveObject other)
-    {
-        return name.CompareTo(other.name);
-    }
+        #region UnityMethods
 
-    public void Action()
-    {
-        _color = Random.ColorHSV();
-        if (TryGetComponent(out Renderer renderer))
+        private void Start()
         {
-            renderer.material.color = _color;
+            IsInteractable = true;
+
+            _color = ColorManager.GetValue(Range(0, 9));
+
+            if (TryGetComponent(out Renderer renderer))
+            {
+                renderer.material.color = _color;
+            }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!IsInteractable || !other.CompareTag("Player"))
+            {
+                return;
+            }
+
+            Interaction();
+            IsInteractable = false;
+        }
+
+        #endregion
+
+
+        #region Methods
+
+        protected abstract void Interaction();
+
+        #endregion
+
+
+        #region IExecuteMethods
+
+        public abstract void Execute();
+
+        #endregion
     }
 }

@@ -7,25 +7,47 @@ namespace JevLogin
 {
     public sealed class BadBonus : InteractiveObject, IFlay, IRotation
     {
+        #region Fields
+
+        public event Action<string, Color> OnCaughtPlayerChange = delegate (string str, Color color) { };
+
         private float _lengthFlay;
         private float _speedRotation;
 
-        private event EventHandler<CaughtPlayerEventArgs> _caughPlayer;
-        public event EventHandler<CaughtPlayerEventArgs> CaughPlayer
-        {
-            add { _caughPlayer += value; }
-            remove { _caughPlayer -= value; }
-        }
+        #endregion
+
+
+        #region UnityMethods
 
         private void Awake()
         {
             _lengthFlay = Range(1.0f, 5.0f);
             _speedRotation = Range(10.0f, 50.0f);
         }
-        
+
+        #endregion
+
+
+        #region IExecute
+
+        public override void Execute()
+        {
+            if (!IsInteractable)
+            {
+                return;
+            }
+            Flay();
+            Rotation();
+        }
+
+        #endregion
+
+
+        #region Methods
+
         protected override void Interaction()
         {
-            _caughPlayer?.Invoke(this, new CaughtPlayerEventArgs(_color));
+            OnCaughtPlayerChange.Invoke(gameObject.name, _color);
         }
 
         public void Flay()
@@ -37,5 +59,7 @@ namespace JevLogin
         {
             transform.Rotate(Vector3.up * (Time.deltaTime * _speedRotation), Space.World);
         }
+
+        #endregion
     }
 }
