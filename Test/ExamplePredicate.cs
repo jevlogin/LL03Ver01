@@ -6,11 +6,27 @@ using UnityEngine;
 
 namespace JevLogin
 {
-    public sealed class ExamplePredicate
+    public sealed class ExamplePredicate : MonoBehaviour
     {
         public void Main()
         {
             TraditionalDelegateSyntax();
+            AnonymousMethodSyntax();
+        }
+
+        private void AnonymousMethodSyntax()
+        {
+            //  Создать список целых чисел
+            List<int> list = new List<int>();
+            list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
+            // Теперь использовать анонимный метод
+            List<int> evenNumbers = list.FindAll(delegate (int i) { return (i % 2) == 0; });
+            // Вывод четных чисел
+            Debug.Log("Здесь только четные числа");
+            foreach (int even in evenNumbers)
+            {
+                Debug.Log(even);
+            }
         }
 
         private void TraditionalDelegateSyntax()
@@ -29,7 +45,7 @@ namespace JevLogin
                 Debug.Log(evenNumber);
             }
         }
-
+        // Цель для делегата Predicate<>.
         private bool IsEvenNumber(int i)
         {
             return i % 2 == 0;
