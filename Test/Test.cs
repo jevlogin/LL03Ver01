@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -19,6 +20,11 @@ namespace JevLogin
             {
                 Debug.Log($"{element}");
             }
+            Debug.Log($"------------------");
+
+            List<int> vs = new List<int>() { 4, 5, 6, 9, 5, 7, 6, 1 };
+            vs.Sort();
+            Debug.Log(vs.BinarySearch(6));
         }
 
     }
