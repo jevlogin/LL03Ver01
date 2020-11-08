@@ -12,6 +12,22 @@ namespace JevLogin
         {
             TraditionalDelegateSyntax();
             AnonymousMethodSyntax();
+            LambdaExpressionSyntax();
+        }
+
+        private void LambdaExpressionSyntax()
+        {
+            // Создать список целых чисел
+            List<int> list = new List<int>();
+            list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
+            // Теперь использовать лямбда-выражение C#
+            List<int> evenNumbers = list.FindAll(i => (i % 2) == 0);
+            // Вывод четных чисел
+            Debug.Log("Здесь только четные числа:");
+            foreach (int evenNumber in evenNumbers)
+            {
+                Debug.Log(evenNumber);
+            }
         }
 
         private void AnonymousMethodSyntax()
