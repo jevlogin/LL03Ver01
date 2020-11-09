@@ -8,6 +8,12 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static T GetOrAddComponent<T>(this GameObject child) where T : Component
+        {
+            T result = child.GetComponent<T>() ?? child.AddComponent<T>();
+            return result;
+        }
+
         public static bool IsOneOf<T>(this T self, params T[] elem)
         {
             return elem.Contains(self);

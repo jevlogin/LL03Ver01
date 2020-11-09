@@ -10,8 +10,12 @@ namespace JevLogin
     {
         private void Start()
         {
-            ExampleIsOneOf();
+            ExampleGetOrAddComponent();
+        }
 
+        private void ExampleGetOrAddComponent()
+        {
+            gameObject.GetOrAddComponent<Rigidbody>();
         }
 
         private void ExampleIsOneOf()
@@ -32,7 +36,7 @@ namespace JevLogin
                 }
             }
 
-            if (t.IsOneOf(5,8,6,3))
+            if (t.IsOneOf(5, 8, 6, 3, 7))
             {
                 Debug.Log($"Нашли с помощью метода расширения");
             }
