@@ -10,6 +10,10 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static float GetRandom(this Vector2 vector)
+        {
+            return UnityEngine.Random.Range(vew)
+        }
         public static T ReturnRandom<T>(this List<T> list)
         {
             var value = list[UnityEngine.Random.Range(0, list.Count)];
