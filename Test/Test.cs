@@ -10,7 +10,19 @@ namespace JevLogin
     {
         private void Start()
         {
-            ExampleConcat();
+            ExampleDeepCopy();
+
+
+        }
+
+        private void ExampleDeepCopy()
+        {
+            User userOne = new User();
+            User userTwo = userOne.DeepCopy();
+        }
+
+        private class User
+        {
         }
 
         private void ExampleConcat()
@@ -18,7 +30,7 @@ namespace JevLogin
             int[] arrOne = new[] { 1, 2, 3 };
             int[] arrTwo = new[] { 4, 5, 6 };
 
-           var t = arrOne.Concat(arrTwo).Concat(new[] { 7, 8, 9 });
+            var t = arrOne.Concat(arrTwo).Concat(new[] { 7, 8, 9 });
 
             for (int i = 0; i < t.Length; i++)
             {
