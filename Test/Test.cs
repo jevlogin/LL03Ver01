@@ -10,7 +10,8 @@ namespace JevLogin
     {
         private void Start()
         {
-
+            var a = gameObject.GetOrAddComponent<Renderer>();
+            a.material.color = a.material.color.SetColorAlpha(0.3f);
         }
 
         private void ExampleDeepCopy()

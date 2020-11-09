@@ -10,6 +10,11 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static Color SetColorAlpha(this Color c, float alpha)
+        {
+            return new Color(c.r, c.g, c.b, alpha);
+        }
+
         public static List<T> GetAll<T>(this Transform obj)
         {
             var results = new List<T>();
