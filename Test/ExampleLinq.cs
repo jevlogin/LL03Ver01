@@ -95,5 +95,20 @@ namespace JevLogin
             }
         }
 
+        public void Sorting()
+        {
+            var sortedUsers = from u in _users
+                              orderby u.Age //ascending (сортировка по возрастанию) и descending (сортировка по убыванию)
+                              select u;
+
+            var result = _users.OrderBy(u => u.FirstName).ThenBy(u => u.Age).ThenBy(u => u.FirstName.Length); //ThenByDescending() (для сортировки по убыванию)
+
+
+            foreach (User u in sortedUsers)
+            {
+                Debug.Log($"{u.FirstName} - {u.Age}");
+            }
+        }
+
     }
 }
