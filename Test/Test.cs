@@ -8,30 +8,32 @@ namespace JevLogin
 {
     public sealed class Test : MonoBehaviour
     {
-        private void Start()
+        public class EmailAddress
         {
-            int[] nums = { 10, -19, 4, 7, 2, -5, 0 };
-            // Запрос, который получает значения в отсортированном порядке
-            var posNums = from n in nums
-                          where n > 0
-                          orderby n ascending
-                          select n;
-            Console.WriteLine("Values in Upper: ");
-
-            List<int> a = posNums.ToList();
-
-            foreach (int i in posNums)
+            public string Name { get; }
+            public string Address { get; }
+            public EmailAddress(string n, string a)
             {
-                Debug.Log($"{i} ");
+                Name = n;
+                Address = a;
             }
 
-            nums[1] = 10;
-
-            Debug.Log("\n" + posNums.Sum());
-
-            foreach (var el in posNums)
+        }
+        private void Start()
+        {
+            EmailAddress[] addrs = {
+                new EmailAddress("Herb", "Herb@HerbSchildt.com"),
+                new EmailAddress("Tom", "Tom@HerbSchildt.com"),
+                new EmailAddress("Sara", "Sara@HerbSchildt.com")
+            };
+            // Create a query that selects e-mail addresses
+            var eAddrs = from entry in addrs
+                         select entry.Address;
+            Debug.Log("The e-mail addresses are");
+            // Execute the query and display the results
+            foreach (string s in eAddrs)
             {
-                Debug.Log(el);
+                Debug.Log("  " + s);
             }
         }
 
