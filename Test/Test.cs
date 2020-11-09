@@ -10,7 +10,42 @@ namespace JevLogin
     {
         private void Start()
         {
-            AddToList();
+            ExampleIsOneOf();
+
+        }
+
+        private void ExampleIsOneOf()
+        {
+            var arr = new[] { 1, 5, 6, 3 };
+
+            var t = 7;
+
+            foreach (var i in arr)
+            {
+                if (i == 7)
+                {
+                    Debug.Log($"Нашли с помощью foreach");
+                }
+                else
+                {
+                    Debug.Log($"Not");
+                }
+            }
+
+            if (t.IsOneOf(5,8,6,3))
+            {
+                Debug.Log($"Нашли с помощью метода расширения");
+            }
+            else
+            {
+                Debug.Log($"Not");
+            }
+        }
+
+        private void ExampleTryBool(string v)
+        {
+            bool res = v.TryBool();
+            Debug.Log(res);
         }
 
         private void AddToList()
