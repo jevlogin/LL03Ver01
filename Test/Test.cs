@@ -10,39 +10,27 @@ namespace JevLogin
     {
         private void Start()
         {
-            Addition(1, 2, 3, 4, 5);
-            int[] array = new int[] { 5, 4, 3, 2, 1 };
-            Addition(array);
-            Addition();
+            AddToList();
         }
 
-        private void Addition(params int[] integers)
+        private void AddToList()
         {
-            for (int i = 0; i < integers.Length; i++)
+            var list = new List<int>();
+            var list2 = new List<int>();
+
+            list.Add(1);
+
+            1.AddTo(list).AddTo(list2);
+            2.AddTo(list2);
+
+            foreach (var l1 in list)
             {
-                Debug.Log(integers[i]);
+                Debug.Log(l1);
             }
-        }
-    }
 
-    internal class User
-    {
-        private string[] Names =
-        {
-            "Roman",
-            "Ilya",
-            "Igor",
-            "Lera"
-        };
-
-        public IEnumerable<string> UserName 
-        { 
-            get
+            foreach (var l2 in list2)
             {
-                for (int i = 0; i < Names.Length; i++)
-                {
-                    yield return Names[i];
-                }
+                Debug.Log(l2);
             }
         }
     }
