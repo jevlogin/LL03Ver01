@@ -21,20 +21,9 @@ namespace JevLogin
         }
         private void Start()
         {
-            EmailAddress[] addrs = {
-                new EmailAddress("Herb", "Herb@HerbSchildt.com"),
-                new EmailAddress("Tom", "Tom@HerbSchildt.com"),
-                new EmailAddress("Sara", "Sara@HerbSchildt.com")
-            };
-            // Create a query that selects e-mail addresses
-            var eAddrs = from entry in addrs
-                         select entry.Address;
-            Debug.Log("The e-mail addresses are");
-            // Execute the query and display the results
-            foreach (string s in eAddrs)
-            {
-                Debug.Log("  " + s);
-            }
+            ExampleLinq exampleLinq = new ExampleLinq();
+            exampleLinq.Projection();
+
         }
 
     }

@@ -68,5 +68,32 @@ namespace JevLogin
                 Debug.Log($"{user.FirstName} - {user.Age}");
             }
         }
+
+        public void Projection()
+        {
+            var names = _users.Select(u => u.FirstName);
+
+            foreach (string user in names)
+            {
+                Debug.Log(user);
+            }
+        }
+
+
+        public void ExampleLet()
+        {
+            var people = from u in _users
+                         let age = u.Age <= 18 ? u.Age + (18 - u.Age) : u.Age
+                         select new User(u.FirstName, u.LastName)
+                         {
+                             Age = age
+                         };
+
+            foreach (var user in people)
+            {
+                Debug.Log($"{user.FirstName} - {user.Age}");
+            }
+        }
+
     }
 }
