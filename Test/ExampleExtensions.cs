@@ -10,10 +10,27 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static Vector3 MultiplyX(this Vector3 vector, float value)
+        {
+            vector = new Vector3(value * vector.x, vector.y, vector.z);
+            return vector;
+        }
+        public static Vector3 MultiplyY(this Vector3 vector, float value)
+        {
+            vector = new Vector3(vector.x, value * vector.y, vector.z);
+            return vector;
+        }
+        public static Vector3 MultiplyZ(this Vector3 vector, float value)
+        {
+            vector = new Vector3(vector.x, vector.y, value * vector.z);
+            return vector;
+        }
+
         public static float GetRandom(this Vector2 vector)
         {
-            return UnityEngine.Random.Range(vew)
+            return UnityEngine.Random.Range(vector.x, vector.y);
         }
+
         public static T ReturnRandom<T>(this List<T> list)
         {
             var value = list[UnityEngine.Random.Range(0, list.Count)];
