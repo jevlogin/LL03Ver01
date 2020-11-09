@@ -8,9 +8,15 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+
+
         public static T GetOrAddComponent<T>(this GameObject child) where T : Component
         {
-            T result = child.GetComponent<T>() ?? child.AddComponent<T>();
+            var result = child.GetComponent<T>();
+            if (!result)
+            {
+                result = child.AddComponent<T>();
+            }
             return result;
         }
 
