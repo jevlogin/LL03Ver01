@@ -10,6 +10,24 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static int ReturnNearestIndex(this Vector3[] nodes, Vector3 destionation)
+        {
+            var nearestDistance = Mathf.Infinity;
+            var index = 0;
+            var length = nodes.Length;
+            for (var i = 0; i < length; i++)
+            {
+                var distanceToNode = (destionation + nodes[i]).sqrMagnitude;
+                if (!(nearestDistance > distanceToNode))
+                {
+                    continue;
+                }
+                nearestDistance = distanceToNode;
+                index = i;
+            }
+            return index;
+        }
+
         public static T DeepCopy<T>(this T self)
         {
             if (!typeof(T).IsSerializable)
