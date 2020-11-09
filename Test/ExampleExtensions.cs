@@ -10,6 +10,18 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static T ReturnRandom<T>(this List<T> list, T[] itemToExclude)
+        {
+            var value = list[UnityEngine.Random.Range(0, list.Count)];
+
+            while (itemToExclude.Contains(value))
+            {
+                value = list[UnityEngine.Random.Range(0, list.Count)];
+            }
+
+            return value;
+        }
+
         public static int ReturnNearestIndex(this Vector3[] nodes, Vector3 destionation)
         {
             var nearestDistance = Mathf.Infinity;
