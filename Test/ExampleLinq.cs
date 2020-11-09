@@ -204,5 +204,20 @@ namespace JevLogin
                 }
             }
         }
+
+        public void ExampleAllAndAny()
+        {
+            bool result = _users.All(u => u.Age > 20);
+            Debug.Log(result
+                ? "У всех пользователей возраст больше 20"
+                : "Есть пользователи с возрастом меньше 20");
+
+            bool result1 = _users.Any(u => u.Age < 20);
+            Debug.Log(result1
+                ? "Есть пользователи с возрастом меньше 20"
+                : "У всех пользователей возраст больше 20");
+        }
+
+
     }
 }
