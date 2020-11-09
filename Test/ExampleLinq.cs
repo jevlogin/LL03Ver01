@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -145,5 +146,27 @@ namespace JevLogin
             double avr2 = _users.Average(n => n.Age); //средний возраст
         }
 
+        public void ExampleSkipAndTake()
+        {
+            var result = _numbers.Take(3); // три первых элемента
+            var result1 = _numbers.Skip(3); // все элементы, кроме первых трех
+
+            foreach (var t in _users.TakeWhile(x => x.FirstName.StartsWith("I")))
+            {
+                Debug.Log(t);
+            }
+
+            foreach (var t in _users.SkipWhile(x => x.FirstName.StartsWith("I")))
+            {
+                Debug.Log(t);
+            }
+
+            //Метод TakeWhile выбирает цепочку элементов, начиная с первого элемента, пока они удовлетворяют определенному условию. Например:
+
+            string[] teams = { "Бавария", "Боруссия", "Реал Мадрид", "Манчестер Сити", "ПСЖ", "Барселона" };
+            foreach (var t in teams.TakeWhile(x => x.StartsWith("Б")))
+                Console.WriteLine(t);
+            //Согласно условию мы выбираем те команды, которые начинаются с буквы Б. В массиве есть три таких команды. Однако в цикле будут выведены только две первых:
+        }
     }
 }
