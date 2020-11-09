@@ -17,13 +17,22 @@ namespace JevLogin
                           orderby n ascending
                           select n;
             Console.WriteLine("Values in Upper: ");
+
             List<int> a = posNums.ToList();
+
             foreach (int i in posNums)
             {
                 Debug.Log($"{i} ");
             }
+
             nums[1] = 10;
+
             Debug.Log("\n" + posNums.Sum());
+
+            foreach (var el in posNums)
+            {
+                Debug.Log(el);
+            }
         }
 
     }
