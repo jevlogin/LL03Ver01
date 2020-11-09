@@ -9,38 +9,34 @@ namespace JevLogin
     {
         private void Start()
         {
-            int[] array = new int[5] { 1, 2, 3, 4, 5 };
-            IEnumerable<int> reversed = array.Reverse<int>();
-        }
+            User user = new User();
 
-        private ICollection<T> GetUniques<T>(ICollection<T> list)
-        {
-            // Для отслеживания элементов используйте словарь 
-            Dictionary<T, bool> found = new Dictionary<T, bool>();
-            List<T> uniques = new List<T>();
-            // Этот алгоритм сохраняет оригинальный порядок элементов
-            foreach (T val in list)
+            foreach (string name in user.UserName)
             {
-                if (!found.ContainsKey(val))
-                {
-                    found[val] = true;
-                    uniques.Add(val);
-                }
+                Debug.Log(name);
             }
-            return uniques;
         }
 
-        private void Reverse<T>(T[] array)
+    }
+
+    internal class User
+    {
+        private string[] Names =
         {
-            int left = 0;
-            int right = array.Length - 1;
-            while (left < right)
+            "Roman",
+            "Ilya",
+            "Igor",
+            "Lera"
+        };
+
+        public IEnumerable<string> UserName 
+        { 
+            get
             {
-                T temp = array[left];
-                array[left] = array[right];
-                array[right] = temp;
-                left++;
-                right--;
+                for (int i = 0; i < Names.Length; i++)
+                {
+                    yield return Names[i];
+                }
             }
         }
     }
