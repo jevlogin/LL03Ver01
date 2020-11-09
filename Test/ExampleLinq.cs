@@ -168,5 +168,41 @@ namespace JevLogin
                 Console.WriteLine(t);
             //Согласно условию мы выбираем те команды, которые начинаются с буквы Б. В массиве есть три таких команды. Однако в цикле будут выведены только две первых:
         }
+
+        public void ExampleGrouping()
+        {
+            var groups = from user in _users
+                         group user by user.LastName;
+
+            foreach (IGrouping<string, User> g in groups)
+            {
+                Debug.Log(g.Key);
+                foreach (var t in g)
+                {
+                    Debug.Log(t.FirstName);
+                }
+            }
+
+            var groups1 = _users.GroupBy(p => p.LastName)
+                        .Select(g => new { LastName = g.Key, Count = g.Count() });
+
+            var groups2 = _users.GroupBy(p => p.LastName)
+                        .Select(g => new
+                        {
+                            LastName = g.Key,
+                            Count = g.Count(),
+                            Name = g.Select(p => p)
+                        });
+
+            foreach (var g in groups2)
+            {
+                Debug.Log(g.LastName);
+                Debug.Log(g.Count);
+                foreach (var t in g.Name)
+                {
+                    Debug.Log(t.FirstName);
+                }
+            }
+        }
     }
 }
