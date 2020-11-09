@@ -10,7 +10,20 @@ namespace JevLogin
     {
         private void Start()
         {
-            ExampleGetOrAddComponent();
+            ExampleConcat();
+        }
+
+        private void ExampleConcat()
+        {
+            int[] arrOne = new[] { 1, 2, 3 };
+            int[] arrTwo = new[] { 4, 5, 6 };
+
+           var t = arrOne.Concat(arrTwo).Concat(new[] { 7, 8, 9 });
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                Debug.Log(t[i]);
+            }
         }
 
         private void ExampleGetOrAddComponent()
