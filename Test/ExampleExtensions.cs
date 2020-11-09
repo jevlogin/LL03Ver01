@@ -10,6 +10,26 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static Transform FindDeep(this Transform obj, string id)
+        {
+            if (obj.name == id)
+            {
+                return obj;
+            }
+
+            var count = obj.childCount;
+            for (int i = 0; i < count; i++)
+            {
+                var posObj = obj.GetChild(i).FindDeep(id);
+                if (posObj != null)
+                {
+                    return posObj;
+                }
+            }
+
+            return null;
+        }
+
         public static T[] Increase<T>(this T[] values, int increment)
         {
             T[] array = new T[values.Length + increment];
