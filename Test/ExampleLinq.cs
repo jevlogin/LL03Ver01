@@ -218,6 +218,75 @@ namespace JevLogin
                 : "У всех пользователей возраст больше 20");
         }
 
+        private sealed class People
+        {
+            public string FirstName { get; }
+            public string LastName { get; }
+            public string Country { get; set; }
+
+            public People(string firstName, string lastName)
+            {
+                FirstName = firstName;
+                LastName = lastName;
+            }
+        }
+
+        public void ExampleJoin()
+        {
+            User[] users = { new User("Roman", "Muratov") {Age = 18},
+                                new User("Ivan", "Petrov"){Age = 22},
+                                new User("Ilya", "Afanasyev"){Age = 18} };
+            People[] peoples = { new People("Lera", "Muratova"){Country = "Astrakhan"},
+                                new People("Sveta", "Petrova"){Country = "Moscow"},
+                                new People("Lena", "Ivanova"){Country = "Minsk"} };
+
+            var resultJoin = from pl in users
+                             join t in peoples on pl.LastName equals t.LastName
+                             select new { Name = pl.FirstName, Team = pl.LastName, Country = t.Country };
+
+            foreach (var item in resultJoin)
+            {
+                Debug.Log($"{item.Name} - {item.Team} ({item.Country})");
+            }
+
+            resultJoin = users.Join(peoples,
+                p => p.LastName,
+                t => t.LastName,
+                (p, t) => new { Name = p.FirstName, Team = p.LastName, Country = t.Country });
+
+            var resultGroupJoin = peoples.GroupJoin(
+                                            users,
+                                            t => t.LastName,
+                                            pl => pl.LastName,
+                                            (team, pls) => new
+                                            {
+                                                Name = team.LastName,
+                                                Country = team.Country,
+                                                Players = pls.Select(p => p.FirstName)
+                                            });
+
+            foreach (var team in resultGroupJoin)
+            {
+                Debug.Log(team.Name);
+                foreach (string player in team.Players)
+                {
+                    Debug.Log(player);
+                }
+            }
+
+            var resultZip = users.Zip(peoples,
+                (player, team) => new
+                {
+                    Name = player.FirstName,
+                    LastName = team.LastName,
+                    Country = team.Country
+                });
+
+            foreach (var player in resultZip)
+            {
+                Debug.Log($"{player.Name} - {player.LastName} ({player.Country})");
+            }
+        }
 
     }
 }
