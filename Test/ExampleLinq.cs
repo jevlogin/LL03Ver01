@@ -133,5 +133,17 @@ namespace JevLogin
             var result3 = peopleFromAstrakhan.Concat(peopleFromMoscow).Distinct();
         }
 
+        public void ExampleAverage()
+        {
+            int min1 = _numbers.Min();
+            int min2 = _users.Min(n => n.Age); // минимальный возраст
+
+            int max1 = _numbers.Max();
+            int max2 = _users.Max(n => n.Age); // максимальный возраст
+
+            double avr1 = _numbers.Average();
+            double avr2 = _users.Average(n => n.Age); //средний возраст
+        }
+
     }
 }
