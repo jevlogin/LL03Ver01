@@ -10,16 +10,23 @@ namespace JevLogin
     {
         private void Start()
         {
-            int[] nums = { 1, -2, 3, -3, 0, -8, 12, 19, 6, 9, 10 };
-            var posNums = from n in nums 
-                          where n > 0
-                          where n < 10
-                          select n;
-            Debug.Log("Positive numbers less than 10:");
-            foreach (int i in posNums)
+            string[] strs = { ".com", ".net", "hsNameA.com", "hsNameB.net",
+                "test", ".network", "hsNameC.net", "hsNameD.com" };
+            // Create a query that obtains Internet addresses that end with .net
+            // Создадим запрос, который получает все Интернет-адреса, заканчивающиеся на .net
+            var netAddrs = from addr in strs
+                           where addr.Length > 4
+                                 && addr.EndsWith(".net", StringComparison.Ordinal)
+                           // Он  возвращает логическое значение true, если вызывающая его строка оканчивается 
+                           // последовательностью символов, указываемой в качестве аргумента этого метода 
+                           // Сортировка результатов запроса с помощью оператора orderby 
+                           select addr;
+            // Выполним запрос и выведем результаты    
+            foreach (var str in netAddrs)
             {
-                Debug.Log(i + " ");
+                Debug.Log(str);
             }
+
         }
 
     }
