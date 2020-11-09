@@ -110,5 +110,28 @@ namespace JevLogin
             }
         }
 
+        public void WorkingWithSets()
+        {
+            string[] peopleFromAstrakhan = { "Igor", "Roman", "Ivan" };
+            string[] peopleFromMoscow = { "Ilya", "Vitalik", "Denis" };
+
+            // разность множеств
+            //  В данном случае из массива soft убираются все элементы, которые есть в массиве hard. Результатом операции будут два элемента:
+            var result = peopleFromAstrakhan.Except(peopleFromMoscow);
+
+            // пересечение множеств
+            //  Для получения пересечения последовательностей, то есть общих для обоих наборов элементов, применяется метод Intersect:
+            var result1 = peopleFromAstrakhan.Intersect(peopleFromMoscow);
+
+            // объединение множеств
+            //  Для объединения двух последовательностей используется метод Union. Его результатом является новый набор, 
+            //  в котором имеются элементы, как из первой, так и из второй последовательности. 
+            //  Повторяющиеся элементы добавляются в результат только один раз
+            var result2 = peopleFromAstrakhan.Union(peopleFromMoscow);
+
+            // удаление дубликатов
+            var result3 = peopleFromAstrakhan.Concat(peopleFromMoscow).Distinct();
+        }
+
     }
 }
