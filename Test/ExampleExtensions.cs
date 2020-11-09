@@ -10,6 +10,13 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static T[] Increase<T>(this T[] values, int increment)
+        {
+            T[] array = new T[values.Length + increment];
+            values.CopyTo(array, 0);
+            return array;
+        }
+
         public static Vector3 MultiplyX(this Vector3 vector, float value)
         {
             vector = new Vector3(value * vector.x, vector.y, vector.z);
