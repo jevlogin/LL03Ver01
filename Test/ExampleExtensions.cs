@@ -10,6 +10,12 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static T ReturnRandom<T>(this List<T> list)
+        {
+            var value = list[UnityEngine.Random.Range(0, list.Count)];
+            return value;
+        }
+
         public static T ReturnRandom<T>(this List<T> list, T[] itemToExclude)
         {
             var value = list[UnityEngine.Random.Range(0, list.Count)];
