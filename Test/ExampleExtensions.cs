@@ -10,6 +10,13 @@ namespace JevLogin
 {
     public static class ExampleExtensions
     {
+        public static List<T> GetAll<T>(this Transform obj)
+        {
+            var results = new List<T>();
+            obj.GetComponentsInChildren(results);
+            return results;
+        }
+
         public static Transform FindDeep(this Transform obj, string id)
         {
             if (obj.name == id)
