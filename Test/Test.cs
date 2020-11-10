@@ -23,7 +23,6 @@ namespace JevLogin
         {
             ExampleLinq exampleLinq = new ExampleLinq();
             exampleLinq.Projection();
-
         }
 
     }

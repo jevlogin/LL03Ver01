@@ -27,7 +27,7 @@ namespace JevLogin
         {
             foreach (var item in tObjects.Distinct())
             {
-                Debug.Log($"{item} встречается {tObjects.Where(count => count.Equals(item)).Count()} раз");
+                Debug.Log($"{item} встречается {tObjects.Where(obj => obj.Equals(item)).Count()} раз");
             }
 
         }
@@ -36,7 +36,7 @@ namespace JevLogin
         {
             foreach (var item in vsInt.Distinct())
             {
-                Debug.Log($"{item} встречается {vsInt.Where(count => count == item).Count()} раз");
+                Debug.Log($"{item} встречается {vsInt.Where(obj => obj == item).Count()} раз");
             }
         }
 
