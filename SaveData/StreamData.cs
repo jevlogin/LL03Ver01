@@ -23,6 +23,7 @@ namespace JevLogin
                     result.IsEnabled = streamReader.ReadLine().TryBool();
                 }
             }
+            return result;
         }
 
         public void Save(SaveData data, string path = null)
