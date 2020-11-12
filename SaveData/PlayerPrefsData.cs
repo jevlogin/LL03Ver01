@@ -16,25 +16,25 @@ namespace JevLogin
                 result.Name = PlayerPrefs.GetString(key);
             }
 
-             key = XmlNameAttributes.PositionX;
+            key = XmlNameAttributes.PositionX;
             if (PlayerPrefs.HasKey(key))
             {
                 result.Position.X = PlayerPrefs.GetFloat(key);
             }
 
-             key = XmlNameAttributes.PositionY;
+            key = XmlNameAttributes.PositionY;
             if (PlayerPrefs.HasKey(key))
             {
                 result.Position.Y = PlayerPrefs.GetFloat(key);
             }
 
-             key = XmlNameAttributes.PositionZ;
+            key = XmlNameAttributes.PositionZ;
             if (PlayerPrefs.HasKey(key))
             {
                 result.Position.Z = PlayerPrefs.GetFloat(key);
             }
 
-             key = XmlNameAttributes.IsEnable;
+            key = XmlNameAttributes.IsEnable;
             if (PlayerPrefs.HasKey(key))
             {
                 result.IsEnabled = PlayerPrefs.GetString(key).TryBool();
@@ -61,8 +61,10 @@ namespace JevLogin
 
         public void Clear(string value)
         {
-            PlayerPrefs.DeleteKey(value);
+            if (PlayerPrefs.HasKey(value))
+            {
+                PlayerPrefs.DeleteKey(value);
+            }
         }
-
     }
 }
