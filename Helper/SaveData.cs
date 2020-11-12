@@ -10,5 +10,7 @@ namespace JevLogin
         public string Name;
         public Vector3Serializable Position;
         public bool IsEnabled;
+
+        public override string ToString() => $"Name = {Name} Position = {Position}";
     }
 }
