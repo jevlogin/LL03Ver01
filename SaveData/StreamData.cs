@@ -11,7 +11,18 @@ namespace JevLogin
     {
         public SaveData Load(string path = null)
         {
-            throw new System.NotImplementedException();
+            var result = new SaveData();
+            using (var streamReader = new StreamReader(path))
+            {
+                while (!streamReader.EndOfStream)
+                {
+                    result.Name = streamReader.ReadLine();
+                    result.Position.X = streamReader.ReadLine().TrySingle();
+                    result.Position.X = streamReader.ReadLine().TrySingle();
+                    result.Position.X = streamReader.ReadLine().TrySingle();
+                    result.IsEnabled = streamReader.ReadLine().TryBool();
+                }
+            }
         }
 
         public void Save(SaveData data, string path = null)

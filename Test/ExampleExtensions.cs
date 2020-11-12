@@ -162,6 +162,26 @@ namespace JevLogin
             return bool.TryParse(self, out var res) && (res || !res);
         }
 
+        public static float TrySingle(this string self)
+        {
+            var arrayChar = self.ToCharArray();
+            var str = string.Empty;
+
+            for (int i = 0; i < arrayChar.Length; i++)
+            {
+                if (char.IsNumber(arrayChar[i]))
+                {
+                    str += arrayChar[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            var result = float.Parse(str);
+            return result;
+        }
+
         public static T AddTo<T>(this T self, ICollection<T> coll)
         {
             coll.Add(self);
