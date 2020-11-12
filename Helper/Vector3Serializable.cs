@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using UnityEngine;
+
 
 namespace JevLogin
 {
@@ -23,7 +24,7 @@ namespace JevLogin
 
         public static implicit operator Vector3Serializable(Vector3 value)
         {
-            return new Vector3Serializable(value.X, value.Y, value.Z);
+            return new Vector3Serializable(value.x, value.y, value.z);
         }
 
         public override string ToString() => $" (X = {X} Y = {Y} Z = {Z})";
