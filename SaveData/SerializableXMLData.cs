@@ -1,16 +1,16 @@
 ﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 
 namespace JevLogin
 {
-    public sealed class BinarySerializationData<T> : IData<T>
+    public class SerializableXMLData<T> : IData<T>
     {
-        private static BinaryFormatter _formatter;
+        private static XmlSerializer _xmlSerializer;
 
-        public BinarySerializationData()
+        public SerializableXMLData()
         {
-            _formatter = new BinaryFormatter();
+            _xmlSerializer = new XmlSerializer(typeof(T));
         }
 
         public T Load(string path)
@@ -18,11 +18,11 @@ namespace JevLogin
             T result;
             if (!File.Exists(path))
             {
-                return default(T);
+                return default;
             }
             using (var fileStream = new FileStream(path, FileMode.Open))
             {
-                result = (T)_formatter.Deserialize(fileStream);
+                result = (T)_xmlSerializer.Deserialize(fileStream);
             }
             return result;
         }
@@ -33,13 +33,9 @@ namespace JevLogin
             {
                 return;
             }
-            if (!typeof(T).IsSerializable)
-            {
-                return;
-            }
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
-                _formatter.Serialize(fileStream, data);
+                _xmlSerializer.Serialize(fileStream, data);
             }
         }
     }
