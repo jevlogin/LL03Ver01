@@ -58,13 +58,5 @@ namespace JevLogin
         {
             PlayerPrefs.DeleteAll();
         }
-
-        public void Clear(string value)
-        {
-            if (PlayerPrefs.HasKey(value))
-            {
-                PlayerPrefs.DeleteKey(value);
-            }
-        }
     }
 }
