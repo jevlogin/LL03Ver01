@@ -8,15 +8,15 @@ namespace JevLogin
         public T Load(string path = null)
         {
             var str = File.ReadAllText(path);
-            //return JsonUtility.FromJson<T>(UnityEngine.Windows.Crypto.CryptoXOR(str));
-            return JsonUtility.FromJson<T>(str);
+            return JsonUtility.FromJson<T>(Crypto.CryptoXOR(str));
+            //return JsonUtility.FromJson<T>(str);
         }
 
         public void Save(T data, string path = null)
         {
             var str = JsonUtility.ToJson(data);
-            //File.WriteAllText(path, UnityEngine.Windows.Crypto.CryptoXOR(str));
-            File.WriteAllText(path, str);
+            File.WriteAllText(path, Crypto.CryptoXOR(str));
+            //File.WriteAllText(path, str);
         }
     }
 }
