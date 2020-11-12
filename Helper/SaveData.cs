@@ -10,10 +10,5 @@ namespace JevLogin
         public string Name;
         public Vector3Serializable Position;
         public bool IsEnabled;
-
-        public SaveData() 
-        {
-           
-        }
     }
 }
