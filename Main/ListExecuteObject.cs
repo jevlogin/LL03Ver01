@@ -8,7 +8,7 @@ namespace JevLogin
     public sealed class ListExecuteObject : IEnumerator, IEnumerable
     {
         #region Fields
-        
+
         private InteractiveObject _current;
         private IExecute[] _interactiveObjects;
 
@@ -17,7 +17,7 @@ namespace JevLogin
         #endregion
 
 
-        #region Property
+        #region Properties
 
         public ListExecuteObject()
         {
@@ -51,7 +51,7 @@ namespace JevLogin
             _interactiveObjects[Length - 1] = execute;
         }
 
-        public IExecute this [int index]
+        public IExecute this[int index]
         {
             get => _interactiveObjects[index];
             private set => _interactiveObjects[index] = value;
@@ -79,7 +79,7 @@ namespace JevLogin
             return true;
         }
 
-        public void Reset() => _index = -1; 
+        public void Reset() => _index = -1;
 
         #endregion
     }
