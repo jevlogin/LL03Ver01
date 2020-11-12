@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
@@ -18,7 +19,7 @@ namespace JevLogin
             T result;
             if (!File.Exists(path))
             {
-                return default(T);
+                throw new ArgumentException("File not found");
             }
             using (var fileStream = new FileStream(path, FileMode.Open))
             {
@@ -31,11 +32,11 @@ namespace JevLogin
         {
             if (data == null && !string.IsNullOrEmpty(path))
             {
-                return;
+                throw new ArgumentException("Нет данных или отстутствует путь");
             }
             if (!typeof(T).IsSerializable)
             {
-                return;
+                throw new InvalidOperationException("объект не сериализован");
             }
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
