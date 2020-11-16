@@ -164,25 +164,11 @@ namespace JevLogin
 
         public static float TrySingle(this string self)
         {
-            var str = string.Empty;
-            var array = self.TrimStart(' ');
-
-            while (!char.IsLetterOrDigit(array[0]) || !char.IsDigit(array[0]))
+            if (Single.TryParse(self, out var result))
             {
-                array = array.TrimStart(array[0]);
+                return result;
             }
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (char.IsNumber(array[i]))
-                {
-                    str += array[i];
-                }
-                else break;
-            }
-            
-            var result = float.Parse(str);
-            return result;
+            return 0.0f;
         }
 
         public static T AddTo<T>(this T self, ICollection<T> coll)
