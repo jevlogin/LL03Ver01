@@ -25,9 +25,9 @@ namespace JevLogin
             else
             {
                 //_data = new SerializableXMLData<SaveData>();
-                //_data = new BinarySerializationData<SaveData>();
+                _data = new BinarySerializationData<SaveData>();
                 //_data = new StreamData();
-                _data = new JsonData<SaveData>();
+                //_data = new JsonData<SaveData>();
                 //_data = new XMLData();
                 //_data = new PlayerPrefsData();
             }
@@ -69,15 +69,19 @@ namespace JevLogin
                 {
                     var position = goodBonus.transform.position;
                     var name = goodBonus.name;
-                    var isEnabled = goodBonus.isActiveAndEnabled;
+                    var isEnabled = goodBonus.IsInteractable;
                     saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
                 }
                 if (item is BadBonus badBonus)
                 {
                     var position = badBonus.transform.position;
                     var name = badBonus.name;
-                    var isEnabled = badBonus.isActiveAndEnabled;
-                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                    var isEnabled = badBonus.IsInteractable;
+
+                    if (isEnabled)
+                    {
+                        saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                    }
                 }
                 if (item is PlayerBase player)
                 {
@@ -92,7 +96,8 @@ namespace JevLogin
             {
                 var name = save.Name + _fileName;
                 _listFileName.Add(name);
-                _data.Save(save, Path.Combine(_path, name));
+
+                _data.Save(save, name);
             }
         }
 
@@ -100,24 +105,17 @@ namespace JevLogin
         {
             foreach (var item in listObjects)
             {
-                if (item is PlayerBase player)
+                foreach (var file in _listFileName)
                 {
-                    foreach (var file in _listFileName)
+                    var tempFileName = Path.Combine(_path, file);
+                    if (!File.Exists(tempFileName))
                     {
-                        var tempFileName = Path.Combine(_path, file);
-                        if (!File.Exists(tempFileName))
-                        {
-                            Debug.Log($"File not found - {file}");
-                            return;
-                        }
-
-                        var newPlayer = _data.Load(tempFileName);
-                        player.transform.position = newPlayer.Position;
-                        player.name = newPlayer.Name;
-                        player.gameObject.SetActive(newPlayer.IsEnabled);
-
-                        Debug.Log(newPlayer);
+                        Debug.Log($"File not found - {file}");
+                        return;
                     }
+
+                    var tempObject = _data.Load(tempFileName);
+
                 }
             }
         }

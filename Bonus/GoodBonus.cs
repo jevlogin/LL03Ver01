@@ -42,6 +42,7 @@ namespace JevLogin
         {
             if (!IsInteractable)
             {
+                Debug.Log($"Я больше не интерактивный {IsInteractable}");
                 return;
             }
             Flay();

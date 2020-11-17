@@ -19,6 +19,7 @@ namespace JevLogin
         private InputController _inputController;
         private Reference _reference;
         private SaveController _saveController;
+        private SaveDataRepository _saveDataRepository;
 
         private int _countBonuses = 0;
 
@@ -30,7 +31,7 @@ namespace JevLogin
         private void Awake()
         {
             _interactiveObject = new ListExecuteObject();
-
+            _saveDataRepository = new SaveDataRepository();
             _reference = new Reference();
 
             PlayerBase player = null;
@@ -45,7 +46,7 @@ namespace JevLogin
 
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
-                _inputController = new InputController(player, _saveController);
+                _inputController = new InputController(player, _saveController, _saveDataRepository);
                 _interactiveObject.AddExecuteObject(_inputController);
             }
 
@@ -72,13 +73,17 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
-                    badBonus.AddTo(_saveController._listObjects);
+
+                    _saveController._listObjects.Add(badBonus.gameObject);
+                    //badBonus.AddTo(_saveController._listObjects);
                 }
 
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
-                    goodBonus.AddTo(_saveController._listObjects);
+
+                    _saveController._listObjects.Add(goodBonus);
+                    //goodBonus.AddTo(_saveController._listObjects);
                 }
             }
 

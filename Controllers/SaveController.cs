@@ -7,8 +7,6 @@ namespace JevLogin
     public sealed class SaveController
     {
         public List<object> _listObjects;
-        private Reference _reference;
-
 
         public SaveController(PlayerBase player)
         {

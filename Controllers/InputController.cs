@@ -20,10 +20,10 @@ public sealed class InputController : IExecute
 
     #region Properties
 
-    public InputController(PlayerBase player, SaveController saveController)
+    public InputController(PlayerBase player, SaveController saveController, SaveDataRepository saveDataRepository)
     {
+        _saveDataRepository = saveDataRepository;
         _playerBase = player;
-        _saveDataRepository = new SaveDataRepository();
         _saveController = saveController;
     }
 
@@ -45,10 +45,12 @@ public sealed class InputController : IExecute
         {
             _saveDataRepository.Save(_saveController._listObjects);
         }
+
         if (Input.GetKeyDown(_loadAll))
         {
             _saveDataRepository.Load(_saveController._listObjects);
         }
+
         if (Input.GetKeyDown(_loadPlayer))
         {
             _saveDataRepository.Load(_playerBase);

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+
 namespace JevLogin
 {
     public static class ExampleExtensions
@@ -170,6 +171,12 @@ namespace JevLogin
             }
             return 0.0f;
         }
+
+        public static T ToEnum<T>(this string value) where T : struct
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+
 
         public static T AddTo<T>(this T self, ICollection<T> coll)
         {
