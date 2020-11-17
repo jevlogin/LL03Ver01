@@ -18,6 +18,7 @@ namespace JevLogin
         private CameraController _cameraController;
         private InputController _inputController;
         private Reference _reference;
+        private SaveController _saveController;
 
         private int _countBonuses = 0;
 
@@ -36,6 +37,7 @@ namespace JevLogin
             if (PlayerType == PlayerType.Ball)
             {
                 player = _reference.PlayerBall;
+                _saveController = new SaveController(player);
             }
 
             _cameraController = new CameraController(player.transform, _reference.CameraMain.transform);
@@ -43,7 +45,7 @@ namespace JevLogin
 
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
-                _inputController = new InputController(player);
+                _inputController = new InputController(player, _saveController);
                 _interactiveObject.AddExecuteObject(_inputController);
             }
 
@@ -70,11 +72,13 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
+                    badBonus.AddTo(_saveController._listObjects);
                 }
 
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
+                    goodBonus.AddTo(_saveController._listObjects);
                 }
             }
 

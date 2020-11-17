@@ -8,7 +8,11 @@ public sealed class InputController : IExecute
 
     private readonly PlayerBase _playerBase;
     private readonly SaveDataRepository _saveDataRepository;
+    private readonly SaveController _saveController;
+
     private readonly KeyCode _savePlayer = KeyCode.C;
+    private readonly KeyCode _saveAll = KeyCode.Y;
+    private readonly KeyCode _loadAll = KeyCode.U;
     private readonly KeyCode _loadPlayer = KeyCode.V;
 
     #endregion
@@ -16,10 +20,11 @@ public sealed class InputController : IExecute
 
     #region Properties
 
-    public InputController(PlayerBase player)
+    public InputController(PlayerBase player, SaveController saveController)
     {
         _playerBase = player;
         _saveDataRepository = new SaveDataRepository();
+        _saveController = saveController;
     }
 
     #endregion
@@ -36,6 +41,14 @@ public sealed class InputController : IExecute
             _saveDataRepository.Save(_playerBase);
         }
 
+        if (Input.GetKeyDown(_saveAll))
+        {
+            _saveDataRepository.Save(_saveController._listObjects);
+        }
+        if (Input.GetKeyDown(_loadAll))
+        {
+            _saveDataRepository.Load(_saveController._listObjects);
+        }
         if (Input.GetKeyDown(_loadPlayer))
         {
             _saveDataRepository.Load(_playerBase);

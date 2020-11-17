@@ -14,6 +14,8 @@ namespace JevLogin
         private const string _fileName = "data.bat";
         private readonly string _path;
 
+        private List<string> _listFileName;
+
         public SaveDataRepository()
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer)
@@ -25,12 +27,12 @@ namespace JevLogin
                 //_data = new SerializableXMLData<SaveData>();
                 //_data = new BinarySerializationData<SaveData>();
                 //_data = new StreamData();
-                //_data = new JsonData<SaveData>();
-
-                _data = new XMLData();
+                _data = new JsonData<SaveData>();
+                //_data = new XMLData();
                 //_data = new PlayerPrefsData();
             }
             _path = Path.Combine(Application.dataPath, _folderName);
+            _listFileName = new List<string>();
         }
 
         public void Save(PlayerBase player)
@@ -40,8 +42,6 @@ namespace JevLogin
                 Directory.CreateDirectory(_path);
             }
 
-            var interactiveObjects = Object.FindObjectsOfType<InteractiveObject>();
-
             var savePlayer = new SaveData
             {
                 Position = player.transform.position,
@@ -50,6 +50,76 @@ namespace JevLogin
             };
 
             _data.Save(savePlayer, Path.Combine(_path, _fileName));
+        }
+
+
+
+        public void Save(List<object> listObjects)
+        {
+            if (!Directory.Exists(Path.Combine(_path)))
+            {
+                Directory.CreateDirectory(_path);
+            }
+
+            var saveAll = new List<SaveData>();
+
+            foreach (var item in listObjects)
+            {
+                if (item is GoodBonus goodBonus)
+                {
+                    var position = goodBonus.transform.position;
+                    var name = goodBonus.name;
+                    var isEnabled = goodBonus.isActiveAndEnabled;
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                }
+                if (item is BadBonus badBonus)
+                {
+                    var position = badBonus.transform.position;
+                    var name = badBonus.name;
+                    var isEnabled = badBonus.isActiveAndEnabled;
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                }
+                if (item is PlayerBase player)
+                {
+                    var position = player.transform.position;
+                    var name = player.name;
+                    var isEnabled = player.isActiveAndEnabled;
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                }
+            }
+
+            foreach (var save in saveAll)
+            {
+                var name = save.Name + _fileName;
+                _listFileName.Add(name);
+                _data.Save(save, Path.Combine(_path, name));
+            }
+        }
+
+        public void Load(List<object> listObjects)
+        {
+            foreach (var item in listObjects)
+            {
+                if (item is PlayerBase player)
+                {
+                    foreach (var file in _listFileName)
+                    {
+                        var tempFileName = Path.Combine(_path, file);
+                        if (!File.Exists(tempFileName))
+                        {
+                            Debug.Log($"File not found - {file}");
+                            return;
+                        }
+
+                        var newPlayer = _data.Load(tempFileName);
+                        player.transform.position = newPlayer.Position;
+                        player.name = newPlayer.Name;
+                        player.gameObject.SetActive(newPlayer.IsEnabled);
+
+                        Debug.Log(newPlayer);
+                    }
+                }
+            }
         }
 
         public void Load(PlayerBase player)
@@ -67,5 +137,7 @@ namespace JevLogin
 
             Debug.Log(newPlayer);
         }
+
+
     }
 }
