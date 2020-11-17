@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using UnityEngine;
 
@@ -7,6 +8,12 @@ namespace JevLogin
 {
     public sealed class XMLData : IData<SaveData>
     {
+        
+        public string JSONSerialize<T>(T obj, string fullPath)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public SaveData Load(string path = "")
         {
             var result = new SaveData();
@@ -90,6 +97,11 @@ namespace JevLogin
             rootNode.AppendChild(userNode);
 
             xmlDoc.Save(path);
+        }
+
+        public void Save(List<SaveData> saveAll, string fullPath)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

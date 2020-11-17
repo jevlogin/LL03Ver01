@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 
@@ -11,6 +12,12 @@ namespace JevLogin
         public SerializableXMLData()
         {
             _xmlSerializer = new XmlSerializer(typeof(T));
+        }
+
+        
+        public string JSONSerialize<T1>(T1 obj, string fullPath)
+        {
+            throw new System.NotImplementedException();
         }
 
         public T Load(string path)
@@ -37,6 +44,11 @@ namespace JevLogin
             {
                 _xmlSerializer.Serialize(fileStream, data);
             }
+        }
+
+        public void Save(List<T> saveAll, string fullPath)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -25,13 +25,14 @@ namespace JevLogin
             else
             {
                 //_data = new SerializableXMLData<SaveData>();
-                _data = new BinarySerializationData<SaveData>();
+                //_data = new BinarySerializationData<SaveData>();
                 //_data = new StreamData();
-                //_data = new JsonData<SaveData>();
+                _data = new JsonData<SaveData>();
                 //_data = new XMLData();
                 //_data = new PlayerPrefsData();
             }
             _path = Path.Combine(Application.dataPath, _folderName);
+            Debug.Log(_path);
             _listFileName = new List<string>();
         }
 
@@ -52,8 +53,6 @@ namespace JevLogin
             _data.Save(savePlayer, Path.Combine(_path, _fileName));
         }
 
-
-
         public void Save(List<object> listObjects)
         {
             if (!Directory.Exists(Path.Combine(_path)))
@@ -67,13 +66,24 @@ namespace JevLogin
             {
                 if (item is GoodBonus goodBonus)
                 {
+                    Debug.Log($"goodBonus - {goodBonus}");
+
                     var position = goodBonus.transform.position;
                     var name = goodBonus.name;
                     var isEnabled = goodBonus.IsInteractable;
-                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+
+                    //Debug.Log($"isEnabled = {isEnabled}");
+
+                    var good = new SaveData { Position = position, Name = name, IsEnabled = isEnabled };
+
+                    //Debug.Log($"good = {good.GetHashCode()}");
+
+                    saveAll.Add(good);
                 }
                 if (item is BadBonus badBonus)
                 {
+                    //Debug.Log($"badBonus - {badBonus}");
+
                     var position = badBonus.transform.position;
                     var name = badBonus.name;
                     var isEnabled = badBonus.IsInteractable;
@@ -85,6 +95,8 @@ namespace JevLogin
                 }
                 if (item is PlayerBase player)
                 {
+                    //Debug.Log($"player - {player}");
+
                     var position = player.transform.position;
                     var name = player.name;
                     var isEnabled = player.isActiveAndEnabled;
@@ -92,32 +104,38 @@ namespace JevLogin
                 }
             }
 
-            foreach (var save in saveAll)
-            {
-                var name = save.Name + _fileName;
-                _listFileName.Add(name);
+            var name1 = _fileName;
+            var fullPath = Path.Combine(_path, name1);
 
-                _data.Save(save, name);
-            }
+            var text = _data.JSONSerialize(saveAll, fullPath);
+            Debug.Log(text);
+
+
+
+            //foreach (var save in saveAll)
+            //{
+            //    var name = save.Name + _fileName;
+            //    var fullPath = Path.Combine(_path, name);
+
+            //    _listFileName.Add(fullPath);
+
+            //    _data.Save(save, fullPath);
+            //}
         }
 
         public void Load(List<object> listObjects)
         {
-            foreach (var item in listObjects)
+            var file = Path.Combine(_path, _fileName);
+            if (!File.Exists(file))
             {
-                foreach (var file in _listFileName)
-                {
-                    var tempFileName = Path.Combine(_path, file);
-                    if (!File.Exists(tempFileName))
-                    {
-                        Debug.Log($"File not found - {file}");
-                        return;
-                    }
-
-                    var tempObject = _data.Load(tempFileName);
-
-                }
+                Debug.Log($"File not found - {file}");
+                return;
             }
+
+            var listSaveData = _data.Load(file);
+
+            Debug.Log(listSaveData);
+
         }
 
         public void Load(PlayerBase player)

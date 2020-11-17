@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -12,6 +13,12 @@ namespace JevLogin
         public BinarySerializationData()
         {
             _formatter = new BinaryFormatter();
+        }
+
+       
+        public string JSONSerialize<T1>(T1 obj, string fullPath)
+        {
+            throw new NotImplementedException();
         }
 
         public T Load(string path)
@@ -42,6 +49,11 @@ namespace JevLogin
             {
                 _formatter.Serialize(fileStream, data);
             }
+        }
+
+        public void Save(List<T> saveAll, string fullPath)
+        {
+            throw new NotImplementedException();
         }
     }
 }

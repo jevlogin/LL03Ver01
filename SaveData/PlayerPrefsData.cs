@@ -58,5 +58,15 @@ namespace JevLogin
         {
             PlayerPrefs.DeleteAll();
         }
+
+        public void Save(List<SaveData> saveAll, string fullPath)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string JSONSerialize<T>(T obj, string fullPath)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

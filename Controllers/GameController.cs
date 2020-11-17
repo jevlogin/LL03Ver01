@@ -74,16 +74,16 @@ namespace JevLogin
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
 
-                    _saveController._listObjects.Add(badBonus.gameObject);
-                    //badBonus.AddTo(_saveController._listObjects);
+                    _saveController.ListObjects.Add(badBonus);
+                    //badBonus.AddTo(_saveController.ListObjects);
                 }
 
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
 
-                    _saveController._listObjects.Add(goodBonus);
-                    //goodBonus.AddTo(_saveController._listObjects);
+                    _saveController.ListObjects.Add(goodBonus);
+                    //goodBonus.AddTo(_saveController.ListObjects);
                 }
             }
 

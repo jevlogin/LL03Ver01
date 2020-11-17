@@ -43,12 +43,12 @@ public sealed class InputController : IExecute
 
         if (Input.GetKeyDown(_saveAll))
         {
-            _saveDataRepository.Save(_saveController._listObjects);
+            _saveDataRepository.Save(_saveController.ListObjects);
         }
 
         if (Input.GetKeyDown(_loadAll))
         {
-            _saveDataRepository.Load(_saveController._listObjects);
+            _saveDataRepository.Load(_saveController.ListObjects);
         }
 
         if (Input.GetKeyDown(_loadPlayer))
