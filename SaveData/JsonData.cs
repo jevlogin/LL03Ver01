@@ -33,6 +33,17 @@ namespace JevLogin
             var str = File.ReadAllText(path);
             return JsonUtility.FromJson<T>(str);
         }
+        public T DeSerialize<T1>(T1 obj, string fullPath)
+        {
+            string retVal = string.Empty;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
+                var t = serializer.ReadObject(ms);
+                return (T)t;
+
+            }
+        }
 
         public string JSONSerialize<T1>(T1 obj, string fullPath)
         {
