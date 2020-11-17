@@ -25,8 +25,9 @@ namespace JevLogin
                 //_data = new SerializableXMLData<SaveData>();
                 //_data = new BinarySerializationData<SaveData>();
                 //_data = new StreamData();
-                _data = new JsonData<SaveData>();
-                //_data = new XMLData();
+                //_data = new JsonData<SaveData>();
+
+                _data = new XMLData();
                 //_data = new PlayerPrefsData();
             }
             _path = Path.Combine(Application.dataPath, _folderName);
@@ -38,6 +39,9 @@ namespace JevLogin
             {
                 Directory.CreateDirectory(_path);
             }
+
+            var interactiveObjects = Object.FindObjectsOfType<InteractiveObject>();
+
             var savePlayer = new SaveData
             {
                 Position = player.transform.position,
