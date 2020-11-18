@@ -32,26 +32,22 @@ namespace JevLogin
             var data = new SaveData();
             using (var streamReader = new StreamReader(path))
             {
-                var textData = streamReader.ReadToEnd();
-                var array = textData.Split('|');
+                var textData = File.ReadAllText(path);
+
+                var array = textData.Split('\n');
+                string[] dataArray;
 
                 for (int i = 0; i < array.Length; i++)
                 {
-                    Debug.Log($"{array[i]}");
+                    dataArray = array[i].Split(' ');
+                    data.Name = dataArray[0];
+                    data.Position.X = dataArray[1].TrySingle();
+                    data.Position.Y = dataArray[2].TrySingle();
+                    data.Position.Z = dataArray[3].TrySingle();
+                    data.IsEnabled = dataArray[4].TryBool();
+                    data.AddTo(result);
                 }
 
-                while (!streamReader.EndOfStream)
-                {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        data.Name = streamReader.ReadLine();
-                        data.Position.X = streamReader.ReadLine().TrySingle();
-                        data.Position.Y = streamReader.ReadLine().TrySingle();
-                        data.Position.Z = streamReader.ReadLine().TrySingle();
-                        data.IsEnabled = streamReader.ReadLine().TryBool();
-                    }
-                    result.Add(data);
-                }
                 return result;
             }
         }
@@ -84,12 +80,15 @@ namespace JevLogin
             {
                 foreach (var item in saveAll)
                 {
-                    streamWriter.WriteLine(item.Name);
-                    streamWriter.WriteLine(item.Position.X);
-                    streamWriter.WriteLine(item.Position.Y);
-                    streamWriter.WriteLine(item.Position.Z);
+                    streamWriter.Write(item.Name);
+                    streamWriter.Write(" ");
+                    streamWriter.Write(item.Position.X);
+                    streamWriter.Write(" ");
+                    streamWriter.Write(item.Position.Y);
+                    streamWriter.Write(" ");
+                    streamWriter.Write(item.Position.Z);
+                    streamWriter.Write(" ");
                     streamWriter.WriteLine(item.IsEnabled);
-                    streamWriter.WriteLine('|');
                 }
             }
         }
