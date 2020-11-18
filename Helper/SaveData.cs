@@ -8,8 +8,11 @@ namespace JevLogin
     [DataContract]
     public sealed class SaveData
     {
+        [DataMember]
         public string Name;
+        [DataMember]
         public Vector3Serializable Position;
+        [DataMember]
         public bool IsEnabled;
 
         public override string ToString() => $"Name = {Name} Position = {Position} IsVisible = {IsEnabled}";

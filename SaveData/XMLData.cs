@@ -94,7 +94,7 @@ namespace JevLogin
             xmlDoc.Save(path);
         }
 
-        public void Save(List<SaveData> saveAll, string path)
+        public void SaveList(List<SaveData> saveAll, string path)
         {
             var xmlSerializer = new XmlSerializer(typeof(List<SaveData>));
 

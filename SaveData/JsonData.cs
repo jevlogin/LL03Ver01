@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using System.Runtime.Serialization.Json;
 using System;
-using System.Text;
+
 
 namespace JevLogin
 {
@@ -18,9 +18,15 @@ namespace JevLogin
 
         public List<T> LoadList(string path = null)
         {
-            throw new NotImplementedException();
-        }
+            var jsonSerializer = new DataContractJsonSerializer(typeof(List<T>));
 
+            using (var fileStream = new FileStream(path, FileMode.Open))
+            {
+                var newList = jsonSerializer.ReadObject(fileStream) as List<T>;
+                return newList;
+            }
+        }
+        
         public void Save(T data, string path = null)
         {
             var str = JsonUtility.ToJson(data);
@@ -28,9 +34,14 @@ namespace JevLogin
             //File.WriteAllText(path, str);
         }
 
-        public void Save(List<T> saveAll, string path)
+        public void SaveList(List<T> saveAll, string path)
         {
+            var jsonSerializer = new DataContractJsonSerializer(typeof(List<T>));
 
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                jsonSerializer.WriteObject(fileStream, saveAll);
+            }
         }
     }
 }

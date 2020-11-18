@@ -51,7 +51,7 @@ namespace JevLogin
             }
         }
 
-        public void Save(List<T> saveAll, string fullPath)
+        public void SaveList(List<T> saveAll, string fullPath)
         {
             throw new System.NotImplementedException();
         }

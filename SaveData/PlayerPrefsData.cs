@@ -59,7 +59,7 @@ namespace JevLogin
             PlayerPrefs.DeleteAll();
         }
 
-        public void Save(List<SaveData> saveAll, string fullPath)
+        public void SaveList(List<SaveData> saveAll, string fullPath)
         {
             throw new System.NotImplementedException();
         }

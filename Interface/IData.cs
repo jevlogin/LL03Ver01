@@ -6,7 +6,7 @@ namespace JevLogin
     {
         void Save(T data, string path = null);
         T Load(string path = null);
-        void Save(List<T> saveAll, string path);
+        void SaveList(List<T> saveAll, string path);
 
         List<T> LoadList(string path = null);
     }

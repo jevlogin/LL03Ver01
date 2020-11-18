@@ -88,7 +88,7 @@ namespace JevLogin
             }
 
             var fullPath = Path.Combine(_path, _fileName);
-            _data.Save(saveAll, fullPath);
+            _data.SaveList(saveAll, fullPath);
 
         }
 
