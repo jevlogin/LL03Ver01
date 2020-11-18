@@ -1,10 +1,11 @@
 ﻿using System;
-using UnityEngine;
+using System.Runtime.Serialization;
 
 
 namespace JevLogin
 {
     [Serializable]
+    [DataContract]
     public sealed class SaveData
     {
         public string Name;

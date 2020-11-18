@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 
 
@@ -8,12 +9,6 @@ namespace JevLogin
 {
     public sealed class XMLData : IData<SaveData>
     {
-        
-        public string JSONSerialize<T>(T obj, string fullPath)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public SaveData Load(string path = "")
         {
             var result = new SaveData();
@@ -99,9 +94,25 @@ namespace JevLogin
             xmlDoc.Save(path);
         }
 
-        public void Save(List<SaveData> saveAll, string fullPath)
+        public void Save(List<SaveData> saveAll, string path)
         {
-            throw new System.NotImplementedException();
+            var xmlSerializer = new XmlSerializer(typeof(List<SaveData>));
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                xmlSerializer.Serialize(fileStream, saveAll);
+            }
+        }
+
+        public List<SaveData> LoadList(string path = "")
+        {
+            var xmlSerializer = new XmlSerializer(typeof(List<SaveData>));
+
+            using (var fileStream = new FileStream(path, FileMode.Open))
+            {
+                var newList = xmlSerializer.Deserialize(fileStream) as List<SaveData>;
+                return newList;
+            }
         }
     }
 }

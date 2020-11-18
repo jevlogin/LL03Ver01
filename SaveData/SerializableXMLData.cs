@@ -34,6 +34,11 @@ namespace JevLogin
             return result;
         }
 
+        public List<T> LoadList(string path = null)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Save(T data, string path = null)
         {
             if (data == null && !string.IsNullOrEmpty(path))

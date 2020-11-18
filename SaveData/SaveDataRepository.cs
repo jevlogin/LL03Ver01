@@ -27,8 +27,8 @@ namespace JevLogin
                 //_data = new SerializableXMLData<SaveData>();
                 //_data = new BinarySerializationData<SaveData>();
                 //_data = new StreamData();
-                _data = new JsonData<SaveData>();
-                //_data = new XMLData();
+                //_data = new JsonData<SaveData>();
+                _data = new XMLData();
                 //_data = new PlayerPrefsData();
             }
             _path = Path.Combine(Application.dataPath, _folderName);
@@ -66,37 +66,20 @@ namespace JevLogin
             {
                 if (item is GoodBonus goodBonus)
                 {
-                    Debug.Log($"goodBonus - {goodBonus}");
-
                     var position = goodBonus.transform.position;
                     var name = goodBonus.name;
                     var isEnabled = goodBonus.IsInteractable;
-
-                    //Debug.Log($"isEnabled = {isEnabled}");
-
-                    var good = new SaveData { Position = position, Name = name, IsEnabled = isEnabled };
-
-                    //Debug.Log($"good = {good.GetHashCode()}");
-
-                    saveAll.Add(good);
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
                 }
                 if (item is BadBonus badBonus)
                 {
-                    //Debug.Log($"badBonus - {badBonus}");
-
                     var position = badBonus.transform.position;
                     var name = badBonus.name;
                     var isEnabled = badBonus.IsInteractable;
-
-                    if (isEnabled)
-                    {
-                        saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
-                    }
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
                 }
                 if (item is PlayerBase player)
                 {
-                    //Debug.Log($"player - {player}");
-
                     var position = player.transform.position;
                     var name = player.name;
                     var isEnabled = player.isActiveAndEnabled;
@@ -104,23 +87,9 @@ namespace JevLogin
                 }
             }
 
-            var name1 = _fileName;
-            var fullPath = Path.Combine(_path, name1);
+            var fullPath = Path.Combine(_path, _fileName);
+            _data.Save(saveAll, fullPath);
 
-            var text = _data.JSONSerialize(saveAll, fullPath);
-            Debug.Log(text);
-
-
-
-            //foreach (var save in saveAll)
-            //{
-            //    var name = save.Name + _fileName;
-            //    var fullPath = Path.Combine(_path, name);
-
-            //    _listFileName.Add(fullPath);
-
-            //    _data.Save(save, fullPath);
-            //}
         }
 
         public void Load(List<object> listObjects)
@@ -132,9 +101,12 @@ namespace JevLogin
                 return;
             }
 
-            var listSaveData = _data.Load(file);
+            var listSaveData = _data.LoadList(file);
 
-            Debug.Log(listSaveData);
+            foreach (var item in listSaveData)
+            {
+                Debug.Log(item);
+            }
 
         }
 

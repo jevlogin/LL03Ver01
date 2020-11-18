@@ -68,5 +68,10 @@ namespace JevLogin
         {
             throw new System.NotImplementedException();
         }
+
+        public List<SaveData> LoadList(string path = null)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
