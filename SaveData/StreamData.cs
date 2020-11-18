@@ -9,11 +9,6 @@ namespace JevLogin
 {
     public class StreamData : IData<SaveData>
     {
-        public string JSONSerialize<T>(T obj, string fullPath)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public SaveData Load(string path = null)
         {
             var result = new SaveData();
@@ -52,9 +47,25 @@ namespace JevLogin
             }
         }
 
-        public void SaveList(List<SaveData> saveAll, string fullPath)
+        public void SaveList(List<SaveData> saveAll, string path)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(path))
+            {
+                Debug.Log($"Файл или директория отсутствует {path}");
+                return;
+            }
+
+            using (var streamWriter = new StreamWriter(path))
+            {
+                foreach (var item in saveAll)
+                {
+                    streamWriter.WriteLine(item.Name);
+                    streamWriter.WriteLine(item.Position.X);
+                    streamWriter.WriteLine(item.Position.Y);
+                    streamWriter.WriteLine(item.Position.Z);
+                    streamWriter.WriteLine(item.IsEnabled);
+                }
+            }
         }
     }
 }
