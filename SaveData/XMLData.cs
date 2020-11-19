@@ -26,12 +26,6 @@ namespace JevLogin
                         result.Name = reader.GetAttribute(XmlNameAttributes.Value);
                     }
 
-                    key = XmlNameAttributes.TypeModelPlayer;
-                    if (reader.IsStartElement(key))
-                    {
-                       
-                    }
-
                     key = XmlNameAttributes.PositionX;
                     if (reader.IsStartElement(key))
                     {
