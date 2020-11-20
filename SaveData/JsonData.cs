@@ -30,7 +30,13 @@ namespace JevLogin
         public void Save(T data, string path = null)
         {
             var str = JsonUtility.ToJson(data);
-            File.WriteAllText(path, Crypto.CryptoXOR(str));
+            //File.WriteAllText(path, Crypto.CryptoXOR(str));
+
+            var _path = Path.Combine(Application.dataPath, "dataSave", "1.txt");
+            var txt = File.ReadAllText(_path);
+
+            File.WriteAllText(path, Crypto.CryptoJEVLOGIN(txt));
+
             //File.WriteAllText(path, str);
         }
 
@@ -40,7 +46,7 @@ namespace JevLogin
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
-                jsonSerializer.WriteObject(fileStream, saveAll);
+               jsonSerializer.WriteObject(fileStream, saveAll);
             }
         }
     }
