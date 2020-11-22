@@ -9,7 +9,13 @@ namespace JevLogin
     {
         #region Fields
 
+        [Header("Тип игрока:")]
+        [Tooltip("По умолчанию - Ball")]
         public PlayerType PlayerType = PlayerType.Ball;
+
+        [Space(10)]
+        [Range(3, 100)]
+        [Header("Количество созданных призраков:")]
         public int CountEnemy = 3;
 
         private ListExecuteObject _interactiveObject;
