@@ -16,6 +16,7 @@ namespace JevLogin
             //return JsonUtility.FromJson<T>(str);
         }
 
+
         public List<T> LoadList(string path = null)
         {
             var jsonSerializer = new DataContractJsonSerializer(typeof(List<T>));
@@ -26,17 +27,11 @@ namespace JevLogin
                 return newList;
             }
         }
-        
+
         public void Save(T data, string path = null)
         {
             var str = JsonUtility.ToJson(data);
-            //File.WriteAllText(path, Crypto.CryptoXOR(str));
-
-            var _path = Path.Combine(Application.dataPath, "dataSave", "1.txt");
-            var txt = File.ReadAllText(_path);
-
-            File.WriteAllText(path, Crypto.CryptoJEVLOGIN(txt));
-
+            File.WriteAllText(path, Crypto.CryptoXOR(str));
             //File.WriteAllText(path, str);
         }
 

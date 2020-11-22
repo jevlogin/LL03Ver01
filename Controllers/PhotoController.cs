@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace JevLogin
 {
-    public class PhotoController : MonoBehaviour
+    public class PhotoController 
     {
         private bool _isProcessed;
         private readonly string _path;
@@ -30,7 +30,7 @@ namespace JevLogin
             var sc = new Texture2D(screenWidth, screenHeight, TextureFormat.RGB24, true);
             sc.ReadPixels(new Rect(0.0f, 0.0f, screenWidth, screenHeight), 0, 0);
             var bytes = sc.EncodeToPNG();
-            var fileName = String.Format("{0:ddMMyyyy_HHmmssfff}.png", DateTime.Now);
+            var fileName = string.Format("{0:ddMMyyyy_HHmmssfff}.png", DateTime.Now);
             File.WriteAllBytes(Path.Combine(_path, fileName), bytes);
             yield return new WaitForSeconds(2.3f);
             _camera.cullingMask |= 1 << _layers;

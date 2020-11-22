@@ -32,7 +32,6 @@ namespace JevLogin
                 //_data = new PlayerPrefsData();
             }
             _path = Path.Combine(Application.dataPath, _folderName);
-            Debug.Log(_path);
             _listFileName = new List<string>();
         }
 

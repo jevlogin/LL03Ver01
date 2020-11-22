@@ -30,6 +30,8 @@ namespace JevLogin
 
         private void Awake()
         {
+            new GameInitializator();
+
             _interactiveObject = new ListExecuteObject();
             _saveDataRepository = new SaveDataRepository();
             _reference = new Reference();

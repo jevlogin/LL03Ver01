@@ -40,9 +40,8 @@ namespace JevLogin
 
                 if (Physics.Raycast(ray, out raycastHit))
                 {
-                    if (raycastHit.collider.transform == player)
+                    if (raycastHit.collider.transform.Equals(player))
                     {
-
                     }
                 }
             }
