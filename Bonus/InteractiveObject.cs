@@ -13,6 +13,9 @@ namespace JevLogin
         protected Color _color;
         private bool _isInteractable;
 
+        [SerializeField] private bool _isAllowScalling;
+        [SerializeField] private float _activeDistance;
+
         #endregion
 
 
@@ -61,6 +64,24 @@ namespace JevLogin
 
             Interaction();
             IsInteractable = false;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawIcon(transform.position, "MiniMapBorder.png", _isAllowScalling);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+#if UNITY_EDITOR
+            Transform t = transform;
+            //Gizmos.matrix = Matrix4x4.TRS(t.position, t.rotation, t.localScale);
+            //Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+
+            var flat = new Vector3(_activeDistance, 0, _activeDistance);
+            Gizmos.matrix = Matrix4x4.TRS(t.position, t.rotation, flat);
+            Gizmos.DrawWireSphere(Vector3.zero, 5.0f);
+#endif
         }
 
         #endregion

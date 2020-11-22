@@ -18,6 +18,8 @@ namespace JevLogin
         private CameraController _cameraController;
         private InputController _inputController;
         private Reference _reference;
+        private SaveController _saveController;
+        private SaveDataRepository _saveDataRepository;
 
         private int _countBonuses = 0;
 
@@ -28,14 +30,17 @@ namespace JevLogin
 
         private void Awake()
         {
-            _interactiveObject = new ListExecuteObject();
+            new GameInitializator();
 
+            _interactiveObject = new ListExecuteObject();
+            _saveDataRepository = new SaveDataRepository();
             _reference = new Reference();
 
             PlayerBase player = null;
             if (PlayerType == PlayerType.Ball)
             {
                 player = _reference.PlayerBall;
+                _saveController = new SaveController(player);
             }
 
             _cameraController = new CameraController(player.transform, _reference.CameraMain.transform);
@@ -43,7 +48,7 @@ namespace JevLogin
 
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
-                _inputController = new InputController(player);
+                _inputController = new InputController(player, _saveController, _saveDataRepository);
                 _interactiveObject.AddExecuteObject(_inputController);
             }
 
@@ -70,11 +75,17 @@ namespace JevLogin
                 {
                     badBonus.OnCaughtPlayerChange += CaughtPlayer;
                     badBonus.OnCaughtPlayerChange += _displayEndGame.GameOver;
+
+                    _saveController.ListObjects.Add(badBonus);
+                    //badBonus.AddTo(_saveController.ListObjects);
                 }
 
                 if (soloObject is GoodBonus goodBonus)
                 {
                     goodBonus.OnPointChange += AddBonuse;
+
+                    _saveController.ListObjects.Add(goodBonus);
+                    //goodBonus.AddTo(_saveController.ListObjects);
                 }
             }
 

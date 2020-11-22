@@ -1,22 +1,30 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.ProBuilder;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace JevLogin
 {
-    public class Ghost : InteractiveObject
+    public sealed class Ghost : InteractiveObject
     {
-        [SerializeField] private NavMeshAgent _navMeshAgent;
+        #region Fields
+        
+        [Header("Количество точек маршрутизации.")]
         [SerializeField] private Vector3[] _waypoints;
+
+        [Header("Ссылка на префаб призрака")]
+        [SerializeField] private GameObject _prefab;
+
+        private NavMeshAgent _navMeshAgent;
+        private Transform _transformGround;
+        private Vector4 _sizeOfPlatform;
 
         private int _currentWaypointIndex;
 
-        [SerializeField] private Vector4 _sizeOfPlatform;
-        [SerializeField] private Transform _transformGround;
-        [SerializeField] private GameObject _prefab;
+        #endregion
+
+
+        #region UnityMethods
 
         private void Awake()
         {
@@ -33,12 +41,14 @@ namespace JevLogin
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
             }
-
             GenerateWaypoints();
-
             _navMeshAgent.SetDestination(_waypoints[0]);
-
         }
+
+        #endregion
+
+
+        #region Methods
 
         private void GenerateWaypoints()
         {
@@ -87,6 +97,16 @@ namespace JevLogin
             return result;
         }
 
+        protected override void Interaction()
+        {
+            print($"Я столкнулся с игроком");
+        }
+
+        #endregion
+
+
+        #region IExecuteMethods
+
         public override void Execute()
         {
             if ((_navMeshAgent.destination - transform.position).sqrMagnitude <= _navMeshAgent.stoppingDistance * _navMeshAgent.stoppingDistance)
@@ -96,10 +116,6 @@ namespace JevLogin
             }
         }
 
-        protected override void Interaction()
-        {
-            print($"Я столкнулся с игроком");
-        }
-
+        #endregion
     }
 }

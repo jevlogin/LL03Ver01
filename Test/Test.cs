@@ -11,8 +11,8 @@ namespace JevLogin
 
         private void Start()
         {
-            ExampleLinq exampleLinq = new ExampleLinq();
-            exampleLinq.Projection();
+            var a = "  @!  asfds 752 4asd 54";
+            Debug.Log(a.TrySingle());
         }
 
     }
