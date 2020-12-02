@@ -6,11 +6,11 @@ namespace JevLogin
 {
     public sealed class RadarObj : MonoBehaviour
     {
-        [SerializeField] private Image _ico;
+        [SerializeField] private Image _image;
 
         private void OnValidate()
         {
-            _ico = Resources.Load<Image>("MiniMap/RadarObject");
+            _image = Resources.Load<Image>("MiniMap/RadarObject");
         }
 
         private void OnDisable()
@@ -20,7 +20,7 @@ namespace JevLogin
 
         private void OnEnable()
         {
-            Radar.RegisterRadarObject(gameObject, _ico);
+            Radar.RegisterRadarObject(gameObject, _image);
         }
     }
 }
