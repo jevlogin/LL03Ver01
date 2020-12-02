@@ -10,22 +10,14 @@ namespace JevLogin
     {
         private void Start()
         {
-            int[] numbers = { 1, 2, 3, 4, 5, 6, 7 };
-            ref int numberRef = ref Find(4, numbers);
-
-            Debug.Log(numberRef);
+            int readonlyArgument = 44;
+            InArgExample(readonlyArgument);
+            Debug.Log(readonlyArgument);
         }
 
-        private ref int Find(int number, int[] numbers)
+        private void InArgExample(in int number)
         {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                if (numbers[i] == number)
-                {
-                    return ref numbers[i];  // возвращаем ссылку на адрес, а не само значение
-                }
-            }
-            throw new IndexOutOfRangeException("numbers not fount");
+            //number = 19;  //не получиться, так как эта переменная только для чтения
         }
     }
 }
