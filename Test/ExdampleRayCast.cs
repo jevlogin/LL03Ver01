@@ -15,7 +15,7 @@ namespace JevLogin
 
             //RaycastHit raycastHit;
             //if (Physics.Raycast(_cams.ScreenPointToRay(Input.mousePosition), out raycastHit, 100.0f))
-            if (Physics.Raycast(_cams.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f))
+            if (Physics.Raycast(_cams.ScreenPointToRay(Input.mousePosition), out _, 100.0f))
             {
 
             }
