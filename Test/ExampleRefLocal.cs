@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +10,22 @@ namespace JevLogin
     {
         private void Start()
         {
-            int temp = 42;
-            ref int tempReference = ref temp;
-            Debug.Log(temp);
-            tempReference = 123;
-            Debug.Log(temp);
-            temp = 321;
-            Debug.Log(tempReference);
-            int tempSecond = 24;
-            tempReference = ref tempSecond;
-            Debug.Log(tempReference);
+            int[] numbers = { 1, 2, 3, 4, 5, 6, 7 };
+            ref int numberRef = ref Find(4, numbers);
 
+            Debug.Log(numberRef);
+        }
 
+        private ref int Find(int number, int[] numbers)
+        {
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] == number)
+                {
+                    return ref numbers[i];  // возвращаем ссылку на адрес, а не само значение
+                }
+            }
+            throw new IndexOutOfRangeException("numbers not fount");
         }
     }
 }
