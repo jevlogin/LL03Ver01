@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 
@@ -10,11 +11,16 @@ namespace JevLogin
     {
         [DataMember]
         public string Name;
+
         [DataMember]
         public Vector3Serializable Position;
+
         [DataMember]
         public bool IsEnabled;
 
-        public override string ToString() => $"Name = {Name} Position = {Position} IsVisible = {IsEnabled}";
+        [DataMember]
+        public string TypeObject;
+
+        public override string ToString() => $"Name = {Name} Position = {Position} IsVisible = {IsEnabled} TypeObject = {TypeObject}";
     }
 }

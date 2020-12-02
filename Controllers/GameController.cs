@@ -9,8 +9,23 @@ namespace JevLogin
     {
         #region Fields
 
+        private const int _min = 0;
+        private const int _max = 100;
+
+        [Header("Тип игрока:")]
+        [Tooltip("По умолчанию - Ball")]
         public PlayerType PlayerType = PlayerType.Ball;
+
+        [Space(10)]
+        [Range(3, 100)]
+        [Header("Количество созданных призраков:")]
+        [ContextMenuItem("Random Count", nameof(RandomCount))]
         public int CountEnemy = 3;
+
+        private void RandomCount()
+        {
+            CountEnemy = UnityEngine.Random.Range(_min, _max);
+        }
 
         private ListExecuteObject _interactiveObject;
         private DisplayEndGame _displayEndGame;

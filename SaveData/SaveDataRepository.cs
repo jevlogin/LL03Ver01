@@ -68,21 +68,27 @@ namespace JevLogin
                     var position = goodBonus.transform.position;
                     var name = goodBonus.name;
                     var isEnabled = goodBonus.IsInteractable;
-                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                    var type = goodBonus.GetType().Name;
+
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled, TypeObject = type });
                 }
                 if (item is BadBonus badBonus)
                 {
                     var position = badBonus.transform.position;
                     var name = badBonus.name;
                     var isEnabled = badBonus.IsInteractable;
-                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                    var type = badBonus.GetType().Name;
+
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled, TypeObject = type });
                 }
                 if (item is PlayerBase player)
                 {
                     var position = player.transform.position;
                     var name = player.name;
                     var isEnabled = player.isActiveAndEnabled;
-                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled });
+                    var type = player.GetType().Name;
+
+                    saveAll.Add(new SaveData { Position = position, Name = name, IsEnabled = isEnabled, TypeObject = type });
                 }
             }
 
@@ -107,7 +113,33 @@ namespace JevLogin
                 Debug.Log(item);
             }
 
+
+            for (int i = 0; i < listSaveData.Count; i++)
+            {
+                SaveData item = listSaveData[i];
+                if (listObjects[i] is PlayerBall playerBase && item.TypeObject.Equals(typeof(PlayerBall).Name))
+                {
+                    playerBase.transform.position = item.Position;
+                    playerBase.name = item.Name;
+                    playerBase.gameObject.SetActive(item.IsEnabled);
+                }
+                if (listObjects[i] is GoodBonus goodBonus && item.TypeObject.Equals(typeof(GoodBonus).Name))
+                {
+                    goodBonus.transform.position = item.Position;
+                    goodBonus.name = item.Name;
+                    goodBonus.IsInteractable = item.IsEnabled;
+                }
+                if (listObjects[i] is BadBonus badBonus && item.TypeObject.Equals(typeof(BadBonus).Name))
+                {
+                    badBonus.transform.position = item.Position;
+                    badBonus.name = item.Name;
+                    badBonus.IsInteractable = item.IsEnabled;
+                }
+            }
+
         }
+
+
 
         public void Load(PlayerBase player)
         {
