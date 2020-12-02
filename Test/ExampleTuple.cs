@@ -23,17 +23,17 @@ namespace JevLogin
             {
                 return (_currentHP, _maxHP);
             }
+
+            public void Deconstruct(out int currentHP, out int maxHP) => (currentHP, maxHP) = (_currentHP, _maxHP);
         }
 
         private void Start()
         {
             Player player = new Player();
 
-            (int currentHP, int maxHP) playerHp = player.GetHP();
-            Debug.Log($"{playerHp.currentHP}/{playerHp.maxHP}");
+            (int currentHP, int maxHP) = player;
 
-            var playerHp2 = new Tuple<int, int>(42, 100);
-            Debug.Log($"{playerHp2.Item1}/{playerHp2.Item2}");
+            Debug.Log($"{currentHP}/{maxHP}");
         }
     }
 }
